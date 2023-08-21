@@ -1,4 +1,4 @@
 deployement:
   task:
-    - export DEPLOYPATH=/home/jissoftware/public_html
+    - export DEPLOYPATH=/home/jissoftware/public_html/mram
     - /bin/cp * $DEPLOYPATH
