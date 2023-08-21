@@ -8,7 +8,7 @@
 
         @php
             $tbx['tb'] = 1;
-            $tbx['title'] = ' Sub-Category 1';
+            $tbx['title'] = ' Sub-Category';
             $tbx['btn-name'] = 'Add';
             $tbx['btn-link'] = route('admin.sub-category.create');
             $tbx['search-bar'] = true;
