@@ -38,8 +38,22 @@
             <input type="hidden" value="{{ $data->id }}" name="id">
             <div class="col-md-8">
                 <div class="col-12">
-                    <label for="" class="form-label">Name</label>
-                    <input type="text" class="form-control" value="{{ $data->name }}" name="name">
+                    <label for="" class="form-label">Category</label>
+                    <select class="form-select" name="category">
+                        <option value="">Select</option>
+                        @foreach ($cat as $item)
+                            <option value="{{ $item->name }}" {{ $data->category == $item->name ? 'selected' : '' }}>
+                                {{ $item->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('category')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-12">
+                    <label for="" class="form-label">Sub Category</label>
+                    <input type="text" class="form-control" name="sub_category" value="{{ $data->name }}">
                     @error('name')
                         <span class="text-danger">* {{ $message }}</span>
                     @enderror

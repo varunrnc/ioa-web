@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\SubCategory;
 
 use App\Helpers\ApiRes;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\SubCategoryImg;
 use Illuminate\Http\Request;
@@ -18,19 +19,22 @@ class AdminSubCategoryController extends Controller
     }
     public function create()
     {
-        return view('admin.sub-category.create');
+        $cat = Category::all();
+        return view('admin.sub-category.create', compact('cat'));
     }
     public function save(Request $req)
     {
         $req->validate([
-            'name' => 'required|string|max:225',
-           
+            'sub_category' => 'required|string|max:225',
+            'category' => 'required|string|max:225',
+
 
 
         ]);
         $status = null;
         $cat = new SubCategory();
-        $cat->name = $req->name;
+        $cat->category = $req->category;
+        $cat->name = $req->sub_category;
         $cat->description = $req->description;
         $cat->status = $req->status;
         $status = $cat->save();
@@ -72,26 +76,28 @@ class AdminSubCategoryController extends Controller
     }
     public function edit(Request $req)
     {
-        
-        $data = SubCategory::Where('id', $req->id)->with('img')->first();
 
+        $data = SubCategory::Where('id', $req->id)->with('img')->first();
+        $cat = Category::all();
         if (!empty($data)) {
-            return view('admin.sub-category.edit', compact('data'));
+            return view('admin.sub-category.edit', compact('data', 'cat'));
         } else {
             return abort('403', 'Id Not Found');
         }
     }
     public function update(Request $req)
     {
-         $req->validate([
-            'name' => 'required|string|max:225',
-           
+        $req->validate([
+            'sub_category' => 'required|string|max:225',
+            'category' => 'required|string|max:225',
+
 
 
         ]);
         $status = null;
         $item = SubCategory::Where('id', $req->id)->first();
-        $item->name = $req->name;
+        $item->category = $req->category;
+        $item->name = $req->sub_category;
         $item->description = $req->description;
         $item->status = $req->status;
         $status = $item->update();
@@ -140,7 +146,7 @@ class AdminSubCategoryController extends Controller
                 $status =  $img->save();
             }
             if ($status) {
-                return redirect()->back()->with('success', 'Data saved successfully !');
+                return redirect()->back()->with('success', 'Data updated successfully !');
             } else {
                 return redirect()->back()->with('error', 'Error, try again later.');
             }

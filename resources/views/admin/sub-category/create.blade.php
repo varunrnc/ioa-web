@@ -33,14 +33,28 @@
                 </div>
                 {{ Session::forget('error') }}
             @endif
+
             <div class="col-md-8">
                 <div class="col-12">
-                    <label for="" class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name">
+                    <label for="" class="form-label">Category</label>
+                    <select class="form-select" name="category">
+                        <option value="">Select</option>
+                        @foreach ($cat as $item)
+                            <option value="{{ $item->name }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('category')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-12">
+                    <label for="" class="form-label">Sub Category</label>
+                    <input type="text" class="form-control" name="sub_category">
                     @error('name')
                         <span class="text-danger">* {{ $message }}</span>
                     @enderror
                 </div>
+
                 <div class="col-12">
                     <label class="form-label">Description</label>
                     <textarea class="form-control" name="description"></textarea>
