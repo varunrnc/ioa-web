@@ -41,7 +41,7 @@ class ApiPlantController extends Controller
     }
     public function category()
     {
-        $subcat = SubCategory::Where('category', 'Plant')->with('img')->get()->map(function ($data) {
+        $subcat = SubCategory::Where('category', 'Plant')->with('imglg')->get()->map(function ($data) {
             if (is_null($data->description)) {
                 $data->description = '';
             }
