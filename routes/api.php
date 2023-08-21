@@ -56,6 +56,6 @@ Route::controller(Auth_ApiController::class)->group(function () {
 
 Route::controller(ApiPlantController::class)->group(function () {
     Route::get('/plant', 'data');
-    // Route::get('/plant/category', 'category');
-    Route::get('/plant/category', 'byCategory');
+    Route::get('/plant/category', 'category');
+    Route::get('/plant/by/category', 'byCategory');
 });

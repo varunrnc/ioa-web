@@ -41,7 +41,13 @@ class ApiPlantController extends Controller
     }
     public function category()
     {
-        $subcat = SubCategory::all();
+        $subcat = SubCategory::Where('category', 'Plant')->with('img')->get()->map(function ($data) {
+            if (is_null($data->description)) {
+                $data->description = '';
+            }
+
+            return $data;
+        });
         if ($subcat) {
             return ApiRes::data("Datalist", $subcat);
         } else {
@@ -50,17 +56,17 @@ class ApiPlantController extends Controller
     }
     public function byCategory(Request $req)
     {
-      $validator =  Validator::make($req->all(), [
+        $validator =  Validator::make($req->all(), [
             'sub_category' => 'required|string|max:255',
-           
+
         ]);
         if ($validator->fails()) {
             $errors = $validator->errors();
             if ($errors->first('sub_category')) {
                 return ApiRes::failed($errors->first('sub_category'));
-            } 
+            }
         }
-        $plant = Plant::Where('sub_category',$req->sub_category)->with('imglg')->get();
+        $plant = Plant::Where('sub_category', $req->sub_category)->with('imglg')->get();
         if ($plant) {
             return ApiRes::data("Datalist", $plant);
         } else {
