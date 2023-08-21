@@ -14,4 +14,4 @@ jobs:
           server: 216.10.244.99:2083
           username: jissoftware
           password: uA&uOxJ@Mnye
-          server-dir: /home/jissoftware/public_html/mram
+          server-dir: public_html/mram
