@@ -23,4 +23,8 @@ class Plant extends Model
     {
         return $this->hasMany(PlantImg::class, 'pid', 'pid')->where('type', 'lg');
     }
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class, 'pid', 'id');
+    }
 }

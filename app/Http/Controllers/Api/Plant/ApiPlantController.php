@@ -13,31 +13,10 @@ class ApiPlantController extends Controller
 {
     public function data(Request $req)
     {
-        if ($req->id == null || $req->id == "") {
-            $plant = Plant::select('*')
-                ->where('id', '>', '5')
-                ->latest()
-                ->limit(6)
-                ->with('img')
-                ->get();
-            if ($plant) {
-                return ApiRes::data("Plant List", $plant);
-            } else {
-                return ApiRes::error();
-            }
-        } else {
-            $plant = Plant::select('*')
-                ->where('id', '>', $req->id)
-                ->latest()
-                ->limit(6)
-                ->with('img')
-                ->get();
-            if ($plant) {
-                return ApiRes::data("Plant List", $plant);
-            } else {
-                return ApiRes::error();
-            }
-        }
+        $data = Plant::latest()->with('imglg')->with('wishlist', function ($wishlist) {
+            return $wishlist->where('uid', auth()->user()->id)->get();
+        })->get();
+        return ApiRes::data('Datalist', $data);
     }
     public function category()
     {
@@ -66,7 +45,9 @@ class ApiPlantController extends Controller
                 return ApiRes::failed($errors->first('sub_category'));
             }
         }
-        $plant = Plant::Where('sub_category', $req->sub_category)->with('imglg')->get();
+        $plant = Plant::Where('sub_category', $req->sub_category)->with('imglg')->with('wishlist', function ($wishlist) {
+            return $wishlist->where('uid', auth()->user()->id)->get();
+        })->get();
         if ($plant) {
             return ApiRes::data("Datalist", $plant);
         } else {

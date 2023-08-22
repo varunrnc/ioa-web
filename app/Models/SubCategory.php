@@ -22,4 +22,8 @@ class SubCategory extends Model
     {
         return $this->hasMany(SubCategoryImg::class, 'sub_cat_id', 'id')->where('type', 'lg');
     }
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class, 'pid', 'id');
+    }
 }

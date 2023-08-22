@@ -27,6 +27,7 @@ class ApiRes
 
         return response()->json(["status" => false, "message" => $msg]);
     }
+
     public static function inactiveUser()
     {
         return response()->json(["status" => false, "message" => "Account deactived !"]);
@@ -37,7 +38,11 @@ class ApiRes
     }
     public static function data($msg, $data)
     {
-        return response()->json(["status" => true, "message" => $msg, "data" => $data]);
+        if (count($data) == 0) {
+            return response()->json(["status" => false, "message" => "Data not found."]);
+        } else {
+            return response()->json(["status" => true, "message" => $msg, "data" => $data]);
+        }
     }
     public static function otp($msg, $otp)
     {
@@ -49,6 +54,7 @@ class ApiRes
 
         return response()->json(["status" => true, "message" => $msg]);
     }
+
     public static function logout()
     {
 

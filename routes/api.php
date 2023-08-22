@@ -12,6 +12,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Api\Mix_ApiController;
 use App\Http\Controllers\Api\Plant\ApiPlantController;
 use App\Http\Controllers\Api\Webinar_ApiController;
+use App\Http\Controllers\Api\Wishlist\ApiWishlistController;
 
 // Authenticated Routes
 Route::middleware('auth:sanctum')->group(function () {
@@ -45,6 +46,18 @@ Route::middleware('auth:sanctum')->group(function () {
     // Mix Controller
     Route::apiResource('getdata', Mix_ApiController::class);
     Route::apiResource('setdata', Mix_ApiController::class);
+
+    // Plants
+    Route::controller(ApiPlantController::class)->group(function () {
+        Route::get('/plant', 'data');
+        Route::get('/plant/category', 'category');
+        Route::get('/plant/by/category', 'byCategory');
+    });
+    // Wishlist
+    Route::controller(ApiWishlistController::class)->group(function () {
+        Route::get('/wishlist', 'data');
+        Route::post('/wishlist/crud', 'crud');
+    });
 });
 
 // Register & Login Api
@@ -52,10 +65,4 @@ Route::controller(Auth_ApiController::class)->group(function () {
     Route::post('/login', 'login');
     Route::middleware('auth:sanctum')->post('/verify/otp', 'verify_otp');
     Route::middleware('auth:sanctum')->post('/logout', 'logout');
-});
-
-Route::controller(ApiPlantController::class)->group(function () {
-    Route::get('/plant', 'data');
-    Route::get('/plant/category', 'category');
-    Route::get('/plant/by/category', 'byCategory');
 });
