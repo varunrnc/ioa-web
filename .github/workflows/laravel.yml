@@ -11,7 +11,7 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: https://jissoftware.in/
+          server: jissoftware.in
           username: jissoftware
           password: uA&uOxJ@Mnye
           server-dir: /home/jissoftware/public_html/mram
