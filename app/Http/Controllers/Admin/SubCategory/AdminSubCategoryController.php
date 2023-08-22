@@ -48,7 +48,7 @@ class AdminSubCategoryController extends Controller
                 ]);
                 $picName =  uniqid() . ".webp";
 
-                Image::make($req->image->getRealPath())->resize('320', '180')->save($path . $picName);
+                Image::make($req->image->getRealPath())->resize('480', '360')->save($path . $picName);
                 $img = new SubCategoryImg();
                 $img->sub_cat_id = $id;
                 $img->slno = '1';
@@ -57,7 +57,7 @@ class AdminSubCategoryController extends Controller
                 $status =  $img->save();
 
                 $picName =  uniqid() . ".webp";
-                Image::make($req->image->getRealPath())->resize('480', '360')->save($path . $picName);
+                Image::make($req->image->getRealPath())->resize('640', '480')->save($path . $picName);
                 $img = new SubCategoryImg();
                 $img->sub_cat_id = $id;
                 $img->slno = '2';
@@ -120,7 +120,7 @@ class AdminSubCategoryController extends Controller
                 }
                 $picName =  uniqid() . ".webp";
 
-                Image::make($req->image->getRealPath())->resize('320', '180')->save($path . $picName);
+                Image::make($req->image->getRealPath())->resize('480', '360')->save($path . $picName);
                 $img = new SubCategoryImg();
                 $img->sub_cat_id = $req->id;
                 $img->slno = '1';
@@ -137,7 +137,7 @@ class AdminSubCategoryController extends Controller
                 }
 
                 $picName =  uniqid() . ".webp";
-                Image::make($req->image->getRealPath())->resize('480', '360')->save($path . $picName);
+                Image::make($req->image->getRealPath())->resize('640', '480')->save($path . $picName);
                 $img = new SubCategoryImg();
                 $img->sub_cat_id = $req->id;
                 $img->slno = '2';
