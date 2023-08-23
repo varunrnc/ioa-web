@@ -7,8 +7,6 @@ name: 🚀 Laravel
 jobs:
   web-deploy:
     name: 🎉 Deploy
-
-
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
@@ -20,4 +18,4 @@ jobs:
           server: sftp://216.10.244.99:22
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: 	mram
+          server-dir: public_html/mram/
