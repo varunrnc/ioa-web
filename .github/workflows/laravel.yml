@@ -20,4 +20,4 @@ jobs:
           server: sftp://216.10.244.99:22
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: 	/home/jissoftware/public_html/mram/
+          server-dir: 	mram
