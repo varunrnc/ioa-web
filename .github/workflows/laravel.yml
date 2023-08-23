@@ -1,5 +1,8 @@
 # testing
-on: push
+on:
+  push:
+    branches:
+      - main
 name: 🚀 Laravel
 jobs:
   web-deploy:
