@@ -18,4 +18,4 @@ jobs:
           server: sftp://216.10.244.99:22/
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: sftp://216.10.244.99:22/mram/
+          local-dir: ./mram\//
