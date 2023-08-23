@@ -15,7 +15,7 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: sftp://216.10.244.99:22
+          server: sftp://216.10.244.99:22/public_html/mram/
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: public_html/mram/
+          # server-dir: public_html/mram/
