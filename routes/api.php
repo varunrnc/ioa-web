@@ -47,12 +47,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('getdata', Mix_ApiController::class);
     Route::apiResource('setdata', Mix_ApiController::class);
 
-//    // Plants
-//    Route::controller(ApiPlantController::class)->group(function () {
-//        Route::get('/plant', 'data');
-//        Route::get('/plant/category', 'category');
-//        Route::get('/plant/by/category', 'byCategory');
-//    });
+    // Plants
+    Route::controller(ApiPlantController::class)->group(function () {
+        Route::get('/plant', 'data');
+        Route::get('/plant/category', 'category');
+        Route::get('/plant/by/category', 'byCategory');
+    });
     // Wishlist
     Route::controller(ApiWishlistController::class)->group(function () {
         Route::get('/wishlist', 'data');
@@ -72,9 +72,4 @@ Route::controller(Auth_ApiController::class)->group(function () {
     Route::post('/login', 'login');
     Route::middleware('auth:sanctum')->post('/verify/otp', 'verify_otp');
     Route::middleware('auth:sanctum')->post('/logout', 'logout');
-});
-Route::controller(ApiPlantController::class)->group(function () {
-    Route::get('/plant', 'data');
-    Route::get('/plant/category', 'category');
-    Route::get('/plant/by/category', 'byCategory');
 });
