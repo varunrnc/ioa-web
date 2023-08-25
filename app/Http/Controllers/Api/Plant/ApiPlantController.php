@@ -28,7 +28,7 @@ class ApiPlantController extends Controller
             return $data;
         });
         if ($subcat) {
-            return ApiRes::data("Datalist", $subcat);
+            return ApiRes::data($subcat);
         } else {
             return ApiRes::error();
         }
@@ -49,7 +49,7 @@ class ApiPlantController extends Controller
             return $wishlist->where('uid', auth()->user()->id)->get();
         })->get();
         if ($plant) {
-            return ApiRes::data("Datalist", $plant);
+            return ApiRes::data($plant);
         } else {
             return ApiRes::error();
         }
