@@ -47,6 +47,7 @@ class AdminPlantController extends Controller
             'category' =>  'required|string|max:225',
             'sub_category' =>  'required|string|max:225',
             'rating' => 'digits_between:1,5',
+            'image1' => 'required|image|mimes:jpeg,jpg,png',
 
         ]);
         $pid = uniqid();

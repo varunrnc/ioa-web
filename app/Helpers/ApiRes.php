@@ -9,19 +9,23 @@ class ApiRes
 
         return response()->json(["status" => false, "message" => "Invalid action type"]);
     }
+
     public static function invalidUser()
     {
         return response()->json(["status" => false, "message" => "Invalid user"]);
     }
+
     public static function credentials()
     {
 
         return response()->json(["status" => false, "message" => "Invalid login credentials"]);
     }
+
     public static function error()
     {
         return response()->json(["status" => false, "message" => "Error ! please try again later."]);
     }
+
     public static function failed($msg)
     {
 
@@ -32,27 +36,42 @@ class ApiRes
     {
         return response()->json(["status" => false, "message" => "Account deactived !"]);
     }
+
     public static function rlMsg($msg, $token)
     {
-        return response()->json(["status" => true, "message" => $msg,  "token" => $token]);
+        return response()->json(["status" => true, "message" => $msg, "token" => $token]);
     }
-    public static function data($msg, $data)
+
+    public static function data($data)
     {
         if (count($data) == 0) {
-            return response()->json(["status" => false, "message" => "Data not found."]);
+            return response()->json(["status" => true, "message" => "Data not found.", "data" => $data]);
         } else {
-            return response()->json(["status" => true, "message" => $msg, "data" => $data]);
+            return response()->json(["status" => true, "message" => "Datalist", "data" => $data]);
         }
+
     }
+
     public static function otp($msg, $otp)
     {
 
         return response()->json(["status" => true, "message" => $msg, "otp" => $otp]);
     }
+
     public static function success($msg)
     {
 
         return response()->json(["status" => true, "message" => $msg]);
+    }
+
+    public static function count($count)
+    {
+        if ($count != 0) {
+            return response()->json(["status" => true, "message" => "Item count", "count" => $count]);
+        } else {
+            return response()->json(["status" => true, "message" => "No Item into cart.", "count" => $count]);
+        }
+
     }
 
     public static function logout()
@@ -60,6 +79,7 @@ class ApiRes
 
         return response()->json(["status" => true, "message" => "You logout successfully !"]);
     }
+
     public static function exception($msg)
     {
 

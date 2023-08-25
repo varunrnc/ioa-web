@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Cart\ApiCartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth_ApiController;
 use App\Http\Controllers\Api\User_ApiController;
@@ -57,6 +58,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(ApiWishlistController::class)->group(function () {
         Route::get('/wishlist', 'data');
         Route::post('/wishlist/crud', 'crud');
+    });
+    Route::controller(ApiCartController::class)->group(function () {
+        Route::get('/cart', 'data');
+        Route::get('/cart/count', 'count');
+        Route::post('/cart/add', 'add');
+        Route::post('/cart/remove', 'remove');
+        Route::post('/cart/delete', 'delete');
     });
 });
 
