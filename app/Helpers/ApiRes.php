@@ -44,12 +44,11 @@ class ApiRes
 
     public static function data($data)
     {
-        if (count($data) == 0) {
-            return response()->json(["status" => true, "message" => "Data not found.", "data" => $data]);
-        } else {
+        if (is_countable($data) && count($data) > 0) {
             return response()->json(["status" => true, "message" => "Datalist", "data" => $data]);
+        } else {
+            return response()->json(["status" => true, "message" => "Data not found.", "data" => $data]);
         }
-
     }
 
     public static function otp($msg, $otp)
@@ -71,7 +70,6 @@ class ApiRes
         } else {
             return response()->json(["status" => true, "message" => "No Item into cart.", "count" => $count]);
         }
-
     }
 
     public static function logout()
