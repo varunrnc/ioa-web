@@ -1,0 +1,214 @@
+@extends('admin.layouts.admin_layout')
+@section('title', 'IOA')
+@section('main-content')
+
+    <div class="admin-container">
+
+        @php
+            $tbx['tb'] = 1;
+            $tbx['title'] = 'Edit Plants';
+            $route_name = 'category';
+            $dummy_image = asset('assets/img/other/select-image.jpg');
+        @endphp
+        @include('admin.includes.title-bar')
+
+        <form id="frm" class="row" action="{{ route('admin.mplant.update') }}" method="POST"
+            enctype="multipart/form-data">
+            @csrf
+            @if (Session::has('success'))
+                <div class="row justify-content-end">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <span> {!! Session::get('success') !!}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                {{ Session::forget('success') }}
+            @endif
+            @if (Session::has('error'))
+                <div class="row justify-content-end">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <span> {!! Session::get('error') !!}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                {{ Session::forget('error') }}
+            @endif
+
+            <div class="row">
+                <input type="text" hidden name="id" value="{{ $data->id }}">
+                <div class="col-12">
+                    <label for="" class="form-label">Title</label>
+                    <input type="text" class="form-control" name="title" value="{{ $data->title }}">
+                    @error('title')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-12">
+                    <label for="" class="form-label">Category</label>
+                    <select class="form-select" name="category">
+                        <option value="">Select</option>
+                        <option value="Fruits" {{ $data->category == 'Fruits' ? 'selected' : '' }}>Fruits</option>
+                        <option value="Flowers" {{ $data->category == 'Flowers' ? 'selected' : '' }}>Flowers</option>
+                        <option value="Vegetables" {{ $data->category == 'Vegetables' ? 'selected' : '' }}>Vegetables
+                        </option>
+                        <option value="Herbs" {{ $data->category == 'Herbs' ? 'selected' : '' }}>Herbs</option>
+
+                    </select>
+                    @error('category')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="col-12">
+                    <label for="" class="form-label">Sub Category</label>
+                    <select class="form-select" name="sub_category">
+                        <option value="">Select</option>
+                        <option value="Winter Season" {{ $data->sub_category == 'Winter Season' ? 'selected' : '' }}>Winter
+                            Season</option>
+                        <option value="Summer Season" {{ $data->sub_category == 'Summer Season' ? 'selected' : '' }}>Summer
+                            Season</option>
+                        <option value="Rain Season" {{ $data->sub_category == 'Rain Season' ? 'selected' : '' }}>Rain
+                            Season
+                        </option>
+                        <option value="Temperate Fruits" {{ $data->sub_category == 'Temperate Fruits' ? 'selected' : '' }}>
+                            Temperate Fruits</option>
+                        <option value="Tropical Fruits" {{ $data->sub_category == 'Tropical Fruits' ? 'selected' : '' }}>
+                            Tropical
+                            Fruits</option>
+                        <option value="Sub-Tropical Fruits"
+                            {{ $data->sub_category == 'Sub-Tropical Fruits' ? 'selected' : '' }}>
+                            Sub-Tropical Fruits</option>
+
+
+                    </select>
+                    @error('sub-category')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" name="description">{{ $data->description }}</textarea>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Soil</label>
+                    <textarea class="form-control" name="soil">{{ $data->soil }}</textarea>
+
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Time of Sowing</label>
+                    <textarea class="form-control" name="time_of_showing">{{ $data->time_of_showing }}</textarea>
+
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Watering</label>
+                    <textarea class="form-control" name="watering">{{ $data->watering }}</textarea>
+
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Fertilizer Requirement</label>
+                    <textarea class="form-control" name="fertilizer_requirement">{{ $data->fertilizer_requirement }}</textarea>
+
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Pest And Diseases</label>
+                    <textarea class="form-control" name="pest_and_diseases">{{ $data->pest_and_diseases }}</textarea>
+
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Spacial Care</label>
+                    <textarea class="form-control" name="special_care">{{ $data->special_care }}</textarea>
+
+                </div>
+                <div class="col-12">
+                    <label for="" class="form-label">Status</label>
+                    <select id="" class="form-select" name="status">
+                        <option value="1" {{ $data->status == '1' ? 'selected' : '' }}>Active</option>
+                        <option value="0" {{ $data->status == '0' ? 'selected' : '' }}>Deactive</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4 position-relative">
+
+                <button type="button" class="btn btn-sm btn-danger del_icon_btn" onclick="remove_image('#showBanner1')">
+                    <i class="icofont-ui-delete"></i>
+                </button>
+
+                <img src="{{ url($data->icon) }}" id="showBanner1" class="pimg img-hover"
+                    onclick="document.getElementById('inputBanner1').click()">
+                <input accept="image/*" type='file' name="image1" id="inputBanner1" class="invisible" />
+                <label for="" class="form-label">Icon</label>
+                @error('image1')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="col-sm-4 position-relative">
+                <button type="button" class="btn btn-sm btn-danger del_icon_btn" onclick="remove_image('#showBanner2')">
+                    <i class="icofont-ui-delete"></i>
+                </button>
+                <img src="{{ url($data->img) }}" id="showBanner2" class="pimg img-hover"
+                    onclick="document.getElementById('inputBanner2').click()">
+                <input accept="image/*" type='file' name="image2" id="inputBanner2" class="invisible" />
+                <label for="" class="form-label">Image</label>
+                @error('image2')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary fs-4 mt-4 w-100 shadow-lg disable_btn">
+                        Save
+
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+@endsection
+
+
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('.alert').alert();
+            setTimeout(() => {
+                $('.alert').alert('close')
+            }, 3000)
+
+            // frm
+
+            $('#frm').submit(function(e) {
+                // e.preventDefault();
+                $('button[type=submit]').html(
+                    `<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span> Save`
+                );
+
+            });
+
+            // image
+            inputBanner1.onchange = evt => {
+                const [file] = inputBanner1.files
+                if (file) {
+                    showBanner1.src = URL.createObjectURL(file);
+                    $('#inputBanner1').closest('div').find('.del_icon_btn').show();
+                }
+            }
+
+            inputBanner2.onchange = evt => {
+                const [file] = inputBanner2.files
+                if (file) {
+                    showBanner2.src = URL.createObjectURL(file);
+                    $('#inputBanner2').closest('div').find('.del_icon_btn').show();
+                }
+            }
+            //
+            function remove_image(img) {
+                $(img).attr('src', '{{ $dummy_image }}');
+                $(img).closest('div').find('.del_icon_btn').hide();
+                $(img).closest('div').find('input[type="file"]').val(null);
+            }
+        });
+    </script>
+
+@endsection

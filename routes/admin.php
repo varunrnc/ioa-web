@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\OrderSetting_AdminController;
 use App\Http\Controllers\Admin\Video_AdminController;
 use App\Http\Controllers\Admin\Customer_AdminController;
 use App\Http\Controllers\Admin\Chat_AdminController;
+use App\Http\Controllers\Admin\Mplant\AdminMplantController;
 use App\Http\Controllers\Admin\Plant\AdminPlantController;
 use App\Http\Controllers\Admin\SubCategory\AdminSubCategoryController;
 use App\Http\Controllers\Admin\Webinar_AdminController;
@@ -87,5 +88,14 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
         Route::post('/sub-category/save', 'save')->name('admin.sub-category.save');
         Route::post('/sub-category/status', 'status')->name('admin.sub-category.status');
         Route::post('/sub-category/delete', 'delete')->name('admin.sub-category.delete');
+    });
+    Route::controller(AdminMplantController::class)->group(function () {
+        Route::get('/mplant/index', 'index')->name('admin.mplant.index');
+        Route::get('/mplant/create', 'create')->name('admin.mplant.create');
+        Route::post('/mplant/save', 'save')->name('admin.mplant.save');
+        Route::get('/mplant/edit/{id}', 'edit');
+        Route::post('/mplant/update', 'update')->name('admin.mplant.update');
+        Route::post('/mplant/status', 'status')->name('admin.mplant.status');
+        Route::post('/mplant/delete', 'delete')->name('admin.mplant.delete');
     });
 });

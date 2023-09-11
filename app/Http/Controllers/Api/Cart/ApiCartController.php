@@ -16,6 +16,7 @@ class ApiCartController extends Controller
 
         $obj = Cart::count();
         return ApiRes::count($obj);
+//        testing
     }
 
     public function data()
@@ -47,6 +48,7 @@ class ApiCartController extends Controller
                 return ApiRes::error();
             }
         }
+
     }
 
     public function remove(Request $req): JsonResponse
@@ -55,7 +57,7 @@ class ApiCartController extends Controller
         if ($obj->qty == 1) {
             $status = $obj->delete();
             if ($status) {
-                return ApiRes::success("Item deleted.");
+                return ApiRes::success("Item qty updated.");
             } else {
                 return ApiRes::error();
             }
@@ -68,6 +70,7 @@ class ApiCartController extends Controller
                 return ApiRes::error();
             }
         }
+
     }
 
     public function delete(Request $req): JsonResponse
