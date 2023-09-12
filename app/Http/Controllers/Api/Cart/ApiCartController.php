@@ -23,10 +23,8 @@ class ApiCartController extends Controller
     public function data()
     {
         $obj = Cart::Where('uid', auth()->user()->id)->with('plant')->with('img')->get();
-        $plant = ShippingCharges::where('product', 'Plant')->first()->amount;
-        $fartilizer = ShippingCharges::where('product', 'Fartilizer')->first()->amount;
-        $other = array('plant' => $plant, 'fartilizer' => $fartilizer);
-        return ApiRes::cartData($obj, $other);
+
+        return ApiRes::data($obj);
     }
 
 
