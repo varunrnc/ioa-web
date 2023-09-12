@@ -50,6 +50,14 @@ class ApiRes
             return response()->json(["status" => true, "message" => "Data not found.", "data" => $data]);
         }
     }
+    public static function cartData($data, $other)
+    {
+        if (is_countable($data) && count($data) > 0) {
+            return response()->json(["status" => true, "message" => "Datalist", "data" => $data, 'other_data' => $other]);
+        } else {
+            return response()->json(["status" => true, "message" => "Data not found.", "data" => $data]);
+        }
+    }
 
     public static function otp($msg, $otp)
     {

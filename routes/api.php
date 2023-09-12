@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Address\ApiAddressController;
 use App\Http\Controllers\Api\Address_ApiController;
 use App\Http\Controllers\Api\Auth_ApiController;
 use App\Http\Controllers\Api\Cart\ApiCartController;
@@ -62,8 +63,17 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/cart', 'data');
         Route::get('/cart/count', 'count');
         Route::post('/cart/add', 'add');
+        Route::post('/cart/qty', 'qtyUpdate');
         Route::post('/cart/remove', 'remove');
         Route::post('/cart/delete', 'delete');
+    });
+
+    Route::controller(ApiAddressController::class)->group(function () {
+        Route::get('/maddress', 'data');
+        Route::get('/maddress/active', 'getActive');
+        Route::post('/maddress/active', 'setActive');
+        Route::post('/maddress/save', 'save');
+        Route::post('/maddress/delete', 'delete');
     });
 });
 

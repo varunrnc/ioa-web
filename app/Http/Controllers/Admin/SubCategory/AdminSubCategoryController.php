@@ -8,7 +8,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\SubCategoryImg;
 use Illuminate\Http\Request;
-use Image;
+use Intervention\Image\Facades\Image;
 
 class AdminSubCategoryController extends Controller
 {

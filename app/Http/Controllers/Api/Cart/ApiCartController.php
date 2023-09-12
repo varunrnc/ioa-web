@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Cart;
 use App\Helpers\ApiRes;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\ShippingCharges;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -16,13 +17,16 @@ class ApiCartController extends Controller
 
         $obj = Cart::count();
         return ApiRes::count($obj);
-//        testing
+        //        testing
     }
 
     public function data()
     {
         $obj = Cart::Where('uid', auth()->user()->id)->with('plant')->with('img')->get();
-        return ApiRes::data($obj);
+        $plant = ShippingCharges::where('product', 'Plant')->first()->amount;
+        $fartilizer = ShippingCharges::where('product', 'Fartilizer')->first()->amount;
+        $other = array('plant' => $plant, 'fartilizer' => $fartilizer);
+        return ApiRes::cartData($obj, $other);
     }
 
 
@@ -48,7 +52,17 @@ class ApiCartController extends Controller
                 return ApiRes::error();
             }
         }
-
+    }
+    public function qtyUpdate(Request $req): JsonResponse
+    {
+        $obj = Cart::Where('uid', auth()->user()->id)->Where('pid', $req->pid)->first();
+        $obj->qty = $req->qty;
+        $status = $obj->update();
+        if ($status) {
+            return ApiRes::success("Item qty updated.");
+        } else {
+            return ApiRes::error();
+        }
     }
 
     public function remove(Request $req): JsonResponse
@@ -70,7 +84,6 @@ class ApiCartController extends Controller
                 return ApiRes::error();
             }
         }
-
     }
 
     public function delete(Request $req): JsonResponse

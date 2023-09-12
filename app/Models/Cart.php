@@ -11,7 +11,7 @@ class Cart extends Model
 
     public function plant()
     {
-        return $this::hasOne(Plant::class, 'pid', 'pid');
+        return $this->hasOne(Plant::class, 'pid', 'pid');
     }
 
     public function img()
