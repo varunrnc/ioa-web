@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Customer_AdminController;
 use App\Http\Controllers\Admin\Chat_AdminController;
 use App\Http\Controllers\Admin\Mplant\AdminMplantController;
 use App\Http\Controllers\Admin\Plant\AdminPlantController;
+use App\Http\Controllers\Admin\Razorpay\AdminRazorpayController;
 use App\Http\Controllers\Admin\Shipping\AdminShippingController;
 use App\Http\Controllers\Admin\SubCategory\AdminSubCategoryController;
 use App\Http\Controllers\Admin\Webinar_AdminController;
@@ -107,5 +108,8 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
         Route::post('/shipping/update', 'update')->name('admin.shipping.update');
         Route::post('/shipping/status', 'status')->name('admin.shipping.status');
         Route::post('/shipping/delete', 'delete')->name('admin.shipping.delete');
+    });
+    Route::controller(AdminRazorpayController::class)->group(function () {
+        Route::get('/razorpay', 'refund');
     });
 });

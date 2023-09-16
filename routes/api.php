@@ -6,9 +6,11 @@ use App\Http\Controllers\Api\Auth_ApiController;
 use App\Http\Controllers\Api\Cart\ApiCartController;
 use App\Http\Controllers\Api\Category_ApiController;
 use App\Http\Controllers\Api\Mix_ApiController;
+use App\Http\Controllers\Api\Order\ApiOrderController;
 use App\Http\Controllers\Api\Order_ApiController;
 use App\Http\Controllers\Api\Plant\ApiPlantController;
 use App\Http\Controllers\Api\Product_ApiController;
+use App\Http\Controllers\Api\Razorpay\ApiRazorpayController;
 use App\Http\Controllers\Api\User_ApiController;
 use App\Http\Controllers\Api\Video_ApiController;
 use App\Http\Controllers\Api\Webinar_ApiController;
@@ -73,7 +75,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/maddress/active', 'getActive');
         Route::post('/maddress/active', 'setActive');
         Route::post('/maddress/save', 'save');
+        Route::post('/maddress/update', 'update');
         Route::post('/maddress/delete', 'delete');
+    });
+    Route::controller(ApiRazorpayController::class)->group(function () {
+        Route::get('/razorpay/orderid', 'genOrderId');
+        Route::post('/razorpay/payment', 'payment');
+    });
+    Route::controller(ApiOrderController::class)->group(function () {
+        Route::get('/order', 'data');
     });
 });
 

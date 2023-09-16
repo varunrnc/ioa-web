@@ -34,7 +34,7 @@
                     @foreach ($data as $item)
                         <tr class="cart__table--body__items">
                             <td class="cart__table--body__list">
-                                <h3 class="cart__content--title h4"><a href="#">{{ $item->product }}</a></h3>
+                                <h3 class="cart__content--title h4"><a href="#">{{ $item->category }}</a></h3>
                             </td>
 
                             <td class="cart__table--body__list">

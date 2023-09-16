@@ -39,9 +39,9 @@
                     <label for="" class="form-label">Product</label>
                     <select class="form-select" name="product">
                         <option value="">Select</option>
-                        <option value="Fartilizer" {{ $data->product == 'Fartilizer' ? 'selected' : '' }}>Fertilizer
+                        <option value="Fartilizer" {{ $data->category == 'Fartilizer' ? 'selected' : '' }}>Fertilizer
                         </option>
-                        <option value="Plant" {{ $data->product == 'Plant' ? 'selected' : '' }}>Plant</option>
+                        <option value="Plant" {{ $data->category == 'Plant' ? 'selected' : '' }}>Plant</option>
                     </select>
                     @error('category')
                         <span class="text-danger">{{ $message }}</span>

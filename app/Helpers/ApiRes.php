@@ -50,6 +50,10 @@ class ApiRes
             return response()->json(["status" => true, "message" => "Data not found.", "data" => $data]);
         }
     }
+    public static function mapData($data)
+    {
+        return response()->json(["status" => true, "message" => "Datalist", "data" => $data]);
+    }
 
 
     public static function otp($msg, $otp)

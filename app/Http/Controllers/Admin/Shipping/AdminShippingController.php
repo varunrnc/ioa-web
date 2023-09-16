@@ -25,7 +25,7 @@ class AdminShippingController extends Controller
             'shipping_charges' => 'required|numeric',
         ]);
         $obj = new ShippingCharges();
-        $obj->product = $req->product;
+        $obj->category = $req->product;
         $obj->amount = $req->shipping_charges;
         $obj->status = $req->status;
         $status = $obj->save();
@@ -47,7 +47,7 @@ class AdminShippingController extends Controller
             'shipping_charges' => 'required|numeric',
         ]);
         $obj = ShippingCharges::Where('id', $req->id)->first();
-        $obj->product = $req->product;
+        $obj->category = $req->product;
         $obj->amount = $req->shipping_charges;
         $obj->status = $req->status;
         $status = $obj->update();
