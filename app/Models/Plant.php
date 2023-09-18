@@ -25,6 +25,6 @@ class Plant extends Model
     }
     public function wishlist()
     {
-        return $this->hasMany(Wishlist::class, 'pid', 'id');
+        return $this->hasMany(Wishlist::class, 'pid', 'pid');
     }
 }

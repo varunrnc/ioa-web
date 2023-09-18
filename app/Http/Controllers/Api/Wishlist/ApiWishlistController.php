@@ -11,8 +11,8 @@ class ApiWishlistController extends Controller
 {
     public function data()
     {
-        $obj = Wishlist::Where('uid', auth()->user()->id)->get();
-        return ApiRes::data('Datalist', $obj);
+        $obj = Wishlist::select('pid')->Where('uid', auth()->user()->id)->with('plant')->with('img')->with('wishlist')->get();
+        return ApiRes::data($obj);
     }
     public function crud(Request $req)
     {

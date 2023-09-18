@@ -95,7 +95,7 @@ class ApiRazorpayController extends Controller
             $obj->discount = $discountAmt;
             $obj->shipping_charges = $shippingAmt;
             $obj->total_amt = ($pay->amount / 100);
-            $obj->status = "Pending";
+            $obj->status = "Confirmed";
             $status = $obj->save();
         }
         $status = Cart::where('uid', auth()->user()->id)->delete();
