@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Order_ApiController;
 use App\Http\Controllers\Api\Plant\ApiPlantController;
 use App\Http\Controllers\Api\Product_ApiController;
 use App\Http\Controllers\Api\Razorpay\ApiRazorpayController;
+use App\Http\Controllers\Api\SubCategory\ApiSubCategoryController;
 use App\Http\Controllers\Api\User_ApiController;
 use App\Http\Controllers\Api\Video_ApiController;
 use App\Http\Controllers\Api\Webinar_ApiController;
@@ -92,4 +93,7 @@ Route::controller(Auth_ApiController::class)->group(function () {
     Route::post('/login', 'login');
     Route::middleware('auth:sanctum')->post('/verify/otp', 'verify_otp');
     Route::middleware('auth:sanctum')->post('/logout', 'logout');
+});
+Route::controller(ApiSubCategoryController::class)->group(function () {
+    Route::get('/sub-category', 'data');
 });

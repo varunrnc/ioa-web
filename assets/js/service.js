@@ -31,22 +31,22 @@ class ApiService {
             })
         );
     }
-    // setData(subUrl, data) {
+    // getData(url, data) {
     //     return Promise.resolve(
     //         $.ajax({
-    //             url: subUrl,
-    //             method: "POST",
+    //             url: url,
+    //             method: "GET",
     //             data: JSON.stringify(data),
-    //             dataType: "json",
-    //             contentType: "application/json;",
+
     //         })
     //     );
     // }
-    getData(url) {
+    getData(url, data) {
         return Promise.resolve(
             $.ajax({
                 url: url,
                 type: "GET",
+                data: data
             })
         );
     }

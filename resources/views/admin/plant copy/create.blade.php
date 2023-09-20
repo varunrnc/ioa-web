@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-sm-3">
                         <label for="" class="form-label">Status</label>
-                        <select class="form-select" name="status">
+                        <select id="" class="form-select" name="status">
                             <option value="1" selected>Active</option>
                             <option value="0">Deactive</option>
                         </select>
@@ -168,7 +168,6 @@
 
 @section('script')
     <script>
-        let api = new ApiService();
         $(document).ready(function() {
             $('.alert').alert();
             setTimeout(() => {
@@ -260,24 +259,6 @@
             $(img).closest('div').find('.del_icon_btn').hide();
             $(img).closest('div').find('input[type="file"]').val(null);
         }
-        $('[name="category"]').on('change', function(e) {
-            // alert(this.value)
-            let data = {
-                'category': "Plant"
-            };
-            let req = api.getData("{{ url('api/sub-category') }}", data);
-            req.then((res) => {
-                console.log(res);
-                // if (res.status == true) {
-
-                //     alert(res.message);
-                //     // location.reload();
-                // } else {
-                //     alert(res.message);
-                //     // location.reload();
-                // }
-            });
-        });
     </script>
 @endsection
 
