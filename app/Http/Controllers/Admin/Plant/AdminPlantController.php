@@ -50,6 +50,12 @@ class AdminPlantController extends Controller
             'image1' => 'required|image|mimes:jpeg,jpg,png',
 
         ]);
+        if ($req->category == "Fertilizer") {
+            $req->validate([
+                'unit' => 'required|string|max:225',
+                'weight' => 'required|numeric|min:1',
+            ]);
+        }
         $pid = uniqid();
         $plant = new Plant();
         $plant->pid = $pid;
@@ -57,6 +63,8 @@ class AdminPlantController extends Controller
         $plant->slug = Str::slug($req->title);
         $plant->short_description = $req->short_description;
         $plant->long_description = $req->long_description;
+        $plant->unit = $req->unit;
+        $plant->weight = $req->weight;
         $plant->regular_price = $req->regular_price;
         $plant->selling_price = $req->selling_price;
         $plant->discount = $req->discount;
@@ -167,7 +175,12 @@ class AdminPlantController extends Controller
             'rating' => 'digits_between:1,5',
 
         ]);
-
+        if ($req->category == "Fertilizer") {
+            $req->validate([
+                'unit' => 'required|string|max:225',
+                'weight' => 'required|numeric|min:1',
+            ]);
+        }
         $plant =  Plant::Where('id', $req->id)->first();
         $plant->title = $req->title;
         $plant->slug = Str::slug($req->title);
@@ -175,6 +188,8 @@ class AdminPlantController extends Controller
         $plant->long_description = $req->long_description;
         $plant->regular_price = $req->regular_price;
         $plant->selling_price = $req->selling_price;
+        $plant->unit = $req->unit;
+        $plant->weight = $req->weight;
         $plant->discount = $req->discount;
         $plant->category = $req->category;
         $plant->sub_category = $req->sub_category;

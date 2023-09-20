@@ -41,12 +41,12 @@ class ApiService {
     //         })
     //     );
     // }
-    getData(url, data) {
+    getData(url) {
         return Promise.resolve(
             $.ajax({
                 url: url,
                 type: "GET",
-                data: data
+
             })
         );
     }

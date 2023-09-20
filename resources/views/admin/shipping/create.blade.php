@@ -39,7 +39,7 @@
                     <label for="" class="form-label">Product</label>
                     <select class="form-select" name="product">
                         <option value="">Select</option>
-                        <option value="Fartilizer">Fartilizer</option>
+                        <option value="Fertilizer">Fertilizer</option>
                         <option value="Plant">Plant</option>
                     </select>
                     @error('product')

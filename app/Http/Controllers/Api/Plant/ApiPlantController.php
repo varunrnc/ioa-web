@@ -18,9 +18,18 @@ class ApiPlantController extends Controller
         })->get();
         return ApiRes::data($data);
     }
-    public function category()
+    public function category(Request $req)
     {
-        $subcat = SubCategory::Where('category', 'Plant')->with('imglg')->get()->map(function ($data) {
+        $validator =  Validator::make($req->all(), [
+            'category' => 'required|string|max:255',
+        ]);
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            if ($errors->first('category')) {
+                return ApiRes::failed($errors->first('category'));
+            }
+        }
+        $subcat = SubCategory::Where('category', $req->category)->with('imglg')->get()->map(function ($data) {
             if (is_null($data->description)) {
                 $data->description = '';
             }
@@ -33,11 +42,10 @@ class ApiPlantController extends Controller
             return ApiRes::error();
         }
     }
-    public function byCategory(Request $req)
+    public function subCategoryWizeProduct(Request $req)
     {
         $validator =  Validator::make($req->all(), [
             'sub_category' => 'required|string|max:255',
-
         ]);
         if ($validator->fails()) {
             $errors = $validator->errors();

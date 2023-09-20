@@ -115,6 +115,28 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+                    <div id="unit-set" class="row">
+                        <div class="col-sm-4">
+                            <label for="" class="form-label">Unit</label>
+                            <select class="form-select" name="unit">
+                                <option value="KG" {{ $data->unit == 'KG' ? 'selected' : '' }}>KG</option>
+                                <option value="GM" {{ $data->unit == 'GM' ? 'selected' : '' }}>GM</option>
+                                <option value="Ltr" {{ $data->unit == 'Ltr' ? 'selected' : '' }}>Ltr</option>
+                                <option value="ML" {{ $data->unit == 'ML' ? 'selected' : '' }}>ML</option>
+                                <option value="Combo" {{ $data->unit == 'Combo' ? 'selected' : '' }}>Combo</option>
+                            </select>
+                            @error('unit')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="" class="form-label">Weight in Unit</label>
+                            <input type="number" class="form-control" name="weight" value="{{ $data->weight }}">
+                            @error('weight')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="col-sm-3">
                         <label for="" class="form-label">Status</label>
                         <select id="" class="form-select" name="status">
@@ -184,8 +206,10 @@
 
 @section('script')
     <script>
+        let api = new ApiService();
         $(document).ready(function() {
             Laraberg.init('html_content');
+            $('#unit-set').hide();
             $('.alert').alert();
             setTimeout(() => {
                 $('.alert').alert('close')
@@ -235,12 +259,35 @@
 
 
         $(document).ready(function() {
+            if ("{{ $data->category }}" == "Fertilizer") {
+                $('#unit-set').show();
+            }
             image_edit('#showBanner1', '{{ route($route_name . '.store') }}', 'DELETE_IMAGE', {{ $data->id }},
                 'image1');
             image_edit('#showBanner2', '{{ route($route_name . '.store') }}', 'DELETE_IMAGE', {{ $data->id }},
                 'image2');
             image_edit('#showBanner3', '{{ route($route_name . '.store') }}', 'DELETE_IMAGE', {{ $data->id }},
                 'image3');
+        });
+
+        $('[name="category"]').on('change', function(e) {
+            $('[name="sub_category"]').empty()
+            if ($('[name="category"]').val() == "Fertilizer") {
+                $('#unit-set').show();
+            } else {
+                $('#unit-set').hide();
+            }
+            let req = api.getData("{{ url('admin/sub-category') }}" + "/" + this.value);
+            req.then((res) => {
+                if (res.status == true) {
+                    $.each(res.data, function(index, item) {
+                        $('[name="sub_category"]').append(new Option(item.name, item.name));
+                    });
+                } else {
+                    alert(res.message);
+                    // location.reload();
+                }
+            });
         });
     </script>
 @endsection

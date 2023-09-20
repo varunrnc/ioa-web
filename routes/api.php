@@ -53,9 +53,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Plants
     Route::controller(ApiPlantController::class)->group(function () {
-        Route::get('/plant', 'data');
-        Route::get('/plant/category', 'category');
-        Route::get('/plant/by/category', 'byCategory');
+        Route::get('/mproduct', 'data');
+        Route::get('/mproduct/category', 'category');
+        Route::get('/mproduct/subcategory', 'subCategoryWizeProduct');
+        // Route::get('/fertilizer/by/category', 'fertilizerCate');
     });
     // Wishlist
     Route::controller(ApiWishlistController::class)->group(function () {

@@ -90,6 +90,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
         Route::post('/sub-category/save', 'save')->name('admin.sub-category.save');
         Route::post('/sub-category/status', 'status')->name('admin.sub-category.status');
         Route::post('/sub-category/delete', 'delete')->name('admin.sub-category.delete');
+        Route::get('/sub-category/{category}', 'data');
     });
     Route::controller(AdminMplantController::class)->group(function () {
         Route::get('/mplant/index', 'index')->name('admin.mplant.index');

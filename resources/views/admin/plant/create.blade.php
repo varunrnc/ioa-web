@@ -94,14 +94,15 @@
                         <label for="" class="form-label">Sub Category</label>
                         <select class="form-select" name="sub_category">
                             <option value="">Select</option>
-                            @foreach ($subCat as $item)
+                            {{-- @foreach ($subCat as $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                         @error('sub_category')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+
                     <div class="col-sm-4">
                         <label for="" class="form-label">Rating</label>
                         <input type="number" class="form-control" name="rating" min="1" max="5"
@@ -109,6 +110,28 @@
                         @error('rating')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
+                    </div>
+                    <div id="unit-set" class="row">
+                        <div class="col-sm-4">
+                            <label for="" class="form-label">Unit</label>
+                            <select class="form-select" name="unit">
+                                <option value="KG" selected>KG</option>
+                                <option value="GM">GM</option>
+                                <option value="Ltr">Ltr</option>
+                                <option value="ML">ML</option>
+                                <option value="Combo">Combo</option>
+                            </select>
+                            @error('unit')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="" class="form-label">Weight in Unit</label>
+                            <input type="number" class="form-control" name="weight">
+                            @error('weight')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="col-sm-3">
                         <label for="" class="form-label">Status</label>
@@ -170,6 +193,7 @@
     <script>
         let api = new ApiService();
         $(document).ready(function() {
+            $('#unit-set').hide();
             $('.alert').alert();
             setTimeout(() => {
                 $('.alert').alert('close')
@@ -261,21 +285,22 @@
             $(img).closest('div').find('input[type="file"]').val(null);
         }
         $('[name="category"]').on('change', function(e) {
-            // alert(this.value)
-            let data = {
-                'category': "Plant"
-            };
-            let req = api.getData("{{ url('api/sub-category') }}", data);
+            $('[name="sub_category"]').empty()
+            if ($('[name="category"]').val() == "Fertilizer") {
+                $('#unit-set').show();
+            } else {
+                $('#unit-set').hide();
+            }
+            let req = api.getData("{{ url('admin/sub-category') }}" + "/" + this.value);
             req.then((res) => {
-                console.log(res);
-                // if (res.status == true) {
-
-                //     alert(res.message);
-                //     // location.reload();
-                // } else {
-                //     alert(res.message);
-                //     // location.reload();
-                // }
+                if (res.status == true) {
+                    $.each(res.data, function(index, item) {
+                        $('[name="sub_category"]').append(new Option(item.name, item.name));
+                    });
+                } else {
+                    alert(res.message);
+                    // location.reload();
+                }
             });
         });
     </script>
