@@ -23,7 +23,7 @@ class ApiWishlistController extends Controller
             $obj->pid = $req->id;
             $status = $obj->save();
             if ($status) {
-                return ApiRes::success('Plant added to wishlist.');
+                return ApiRes::success('Product added to wishlist.');
             } else {
                 return ApiRes::error();
             }
@@ -31,7 +31,7 @@ class ApiWishlistController extends Controller
 
             $status = $obj->delete();
             if ($status) {
-                return ApiRes::success('Plant removed from wishlist.');
+                return ApiRes::success('Product removed from wishlist.');
             } else {
                 return ApiRes::error();
             }

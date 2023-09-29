@@ -39,7 +39,7 @@
                     <label for="" class="form-label">Product</label>
                     <select class="form-select" name="product">
                         <option value="">Select</option>
-                        <option value="Fartilizer" {{ $data->category == 'Fartilizer' ? 'selected' : '' }}>Fertilizer
+                        <option value="Fertilizer" {{ $data->category == 'Fertilizer' ? 'selected' : '' }}>Fertilizer
                         </option>
                         <option value="Plant" {{ $data->category == 'Plant' ? 'selected' : '' }}>Plant</option>
                     </select>

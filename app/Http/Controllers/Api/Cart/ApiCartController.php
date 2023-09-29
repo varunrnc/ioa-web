@@ -31,15 +31,21 @@ class ApiCartController extends Controller
 
     public function add(Request $req): JsonResponse
     {
-        $category = Plant::where('pid', $req->pid)->first()->category;
-        $amount = ShippingCharges::where('category', $category)->first()->amount;
+        $totalShippingAmt = null;
+        $plant = Plant::where('pid', $req->pid)->first();
+        $shippingAmt = ShippingCharges::where('category', $plant->category)->first()->amount;
+        if ($plant->unit == "KG" || $plant->unit == "Ltr" || $plant->unit == "Combo") {
+            $totalShippingAmt = $plant->weight * $shippingAmt;
+        } else {
+            $totalShippingAmt =  $shippingAmt;
+        }
 
         $obj = Cart::Where('uid', auth()->user()->id)->Where('pid', $req->pid)->first();
         if ($obj == null) {
             $obj = new Cart();
             $obj->uid = auth()->user()->id;
             $obj->pid = $req->pid;
-            $obj->shipping_charges = $amount;
+            $obj->shipping_charges = $totalShippingAmt;
             $status = $obj->save();
             if ($status) {
                 return ApiRes::success("Item added into cart.");
@@ -48,7 +54,7 @@ class ApiCartController extends Controller
             }
         } else {
             $obj->qty = $obj->qty += 1;
-            $obj->shipping_charges = $obj->shipping_charges += $amount;
+            $obj->shipping_charges = $obj->shipping_charges += $totalShippingAmt;
 
             $status = $obj->update();
             if ($status) {
@@ -60,11 +66,17 @@ class ApiCartController extends Controller
     }
     public function qtyUpdate(Request $req): JsonResponse
     {
-        $category = Plant::where('pid', $req->pid)->first()->category;
-        $amount = ShippingCharges::where('category', $category)->first()->amount;
+        $totalShippingAmt = null;
+        $plant = Plant::where('pid', $req->pid)->first();
+        $shippingAmt = ShippingCharges::where('category', $plant->category)->first()->amount;
+        if ($plant->unit == "KG" || $plant->unit == "Ltr" || $plant->unit == "Combo") {
+            $totalShippingAmt = $plant->weight * $shippingAmt;
+        } else {
+            $totalShippingAmt =  $shippingAmt;
+        }
         $obj = Cart::Where('uid', auth()->user()->id)->Where('pid', $req->pid)->first();
         $obj->qty = $req->qty;
-        $obj->shipping_charges = $req->qty * $amount;
+        $obj->shipping_charges = $req->qty *  $totalShippingAmt;
         $status = $obj->update();
         if ($status) {
             return ApiRes::success("Item qty updated.");

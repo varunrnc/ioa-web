@@ -85,7 +85,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/razorpay/payment', 'payment');
     });
     Route::controller(ApiOrderController::class)->group(function () {
-        Route::get('/order', 'data');
+        Route::get('/morder', 'data');
+        Route::get('/morder/orderid', 'byId');
     });
 });
 
