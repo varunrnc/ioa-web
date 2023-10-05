@@ -79,7 +79,7 @@ return array (
     'normal' => $rootDir . '/lib/fonts/DejaVuSerif',
   ),
   'sourcesanspro' => array(
-    'normal' => $fontDir . '/sourcesanspro_normal_bdfbe15fc7907e3ecc040037e0aa1987',
+    'normal' => $fontDir . '/sourcesanspro_normal_f2ecf30bc5ea5f138abd91b669d855dd',
   ),
 );
 }; ?>

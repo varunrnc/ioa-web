@@ -21,6 +21,13 @@
         <ul class="widget__categories--sub__menu">
             <li class="widget__categories--sub__menu--list">
                 <a class="widget__categories--sub__menu--link d-flex align-items-center"
+                    href="{{ route('admin.order.index') }}">
+                    <i class="icofont-cart menu-icon2"></i>
+                    <span class="widget__categories--sub__menu--text">Orders</span>
+                </a>
+            </li>
+            <li class="widget__categories--sub__menu--list">
+                <a class="widget__categories--sub__menu--link d-flex align-items-center"
                     href="{{ route('order.index') }}">
                     <i class="icofont-cart menu-icon2"></i>
                     <span class="widget__categories--sub__menu--text">Orders</span>
@@ -55,18 +62,18 @@
             </svg>
         </label>
         <ul class="widget__categories--sub__menu">
-            <li class="widget__categories--sub__menu--list">
+            {{-- <li class="widget__categories--sub__menu--list">
                 <a class="widget__categories--sub__menu--link d-flex align-items-center"
                     href="{{ route('product.index') }}">
                     <i class="icofont-cubes menu-icon2"></i>
                     <span class="widget__categories--sub__menu--text">Products</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="widget__categories--sub__menu--list">
                 <a class="widget__categories--sub__menu--link d-flex align-items-center"
                     href="{{ route('admin.plant.index') }}">
-                    <i class="icofont-flora-flower menu-icon2"></i>
-                    <span class="widget__categories--sub__menu--text">Plants</span>
+                    <i class="icofont-cubes menu-icon2"></i>
+                    <span class="widget__categories--sub__menu--text">Products</span>
                 </a>
             </li>
             <li class="widget__categories--sub__menu--list">

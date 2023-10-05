@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\Video_AdminController;
 use App\Http\Controllers\Admin\Customer_AdminController;
 use App\Http\Controllers\Admin\Chat_AdminController;
 use App\Http\Controllers\Admin\Mplant\AdminMplantController;
+use App\Http\Controllers\Admin\Order\AdminOrderController;
+use App\Http\Controllers\Admin\Payment\AdminPaymentController;
 use App\Http\Controllers\Admin\Plant\AdminPlantController;
 use App\Http\Controllers\Admin\Razorpay\AdminRazorpayController;
 use App\Http\Controllers\Admin\Shipping\AdminShippingController;
@@ -112,5 +114,11 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     });
     Route::controller(AdminRazorpayController::class)->group(function () {
         Route::get('/razorpay', 'refund');
+    });
+    Route::controller(AdminOrderController::class)->group(function () {
+        Route::get('/morder', 'index')->name('admin.order.index');
+    });
+    Route::controller(AdminPaymentController::class)->group(function () {
+        Route::get('/payment/{id}', 'index')->name('admin.payment.index');
     });
 });

@@ -24,8 +24,8 @@
             <table class="cart__table--inner">
                 <thead class="cart__table--header">
                     <tr class="cart__table--header__items">
-                        <th class="cart__table--header__list">Category</th>
                         <th class="cart__table--header__list">Sub-Category</th>
+                        <th class="cart__table--header__list">Category</th>
                         <th class="cart__table--header__list">Status</th>
                         <th class="cart__table--header__list text-right">Action</th>
                     </tr>
@@ -33,9 +33,6 @@
                 <tbody class="cart__table--body" id="slider-list">
                     @foreach ($data as $item)
                         <tr class="cart__table--body__items">
-                            <td class="cart__table--body__list">
-                                <h3 class="cart__content--title h4"><a href="#">{{ $item->category }}</a></h3>
-                            </td>
                             <td class="cart__table--body__list">
                                 <div class="cart__product d-flex align-items-center">
                                     <div class="cart__thumbnail">
@@ -48,6 +45,10 @@
                                     </div>
                                 </div>
                             </td>
+                            <td class="cart__table--body__list">
+                                <h3 class="cart__content--title h4"><a href="#">{{ $item->category }}</a></h3>
+                            </td>
+
                             <td class="cart__table--body__list">
                                 <span class="cart__price">
                                     <span class="cart__price">

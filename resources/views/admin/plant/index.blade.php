@@ -9,7 +9,7 @@
 
         @php
             $tbx['tb'] = 1;
-            $tbx['title'] = 'Plant List';
+            $tbx['title'] = 'Product List';
             $tbx['btn-name'] = 'Add';
             $tbx['btn-link'] = route('admin.plant.create');
             $tbx['search-bar'] = true;

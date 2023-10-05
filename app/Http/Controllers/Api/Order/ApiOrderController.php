@@ -10,7 +10,6 @@ use App\Models\OrderedItem;
 use App\Models\Plant;
 use App\Models\PlantImg;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ApiOrderController extends Controller

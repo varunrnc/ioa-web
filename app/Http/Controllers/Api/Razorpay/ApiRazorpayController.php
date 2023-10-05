@@ -52,6 +52,7 @@ class ApiRazorpayController extends Controller
         $shippingAmt = null;
         $api = new Api(env('MRAZORPAY_KEY'), env('MRAZORPAY_SECRET'));
         $pay = $api->payment->fetch($req->payment_id);
+
         if ($pay->status == "captured" && $pay->captured == true) {
             $payment = new Mpayment();
             $payment->uid = auth()->user()->id;
@@ -62,6 +63,7 @@ class ApiRazorpayController extends Controller
             $payment->amount = ($pay->amount / 100);
             $payment->method = $pay->method;
             $payment->currency = $pay->currency;
+            $payment->status = $pay->status;
             $status = $payment->save();
         }
         if ($status) {
