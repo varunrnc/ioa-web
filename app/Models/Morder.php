@@ -13,10 +13,15 @@ class Morder extends Model
     {
         return $this->hasMany(OrderedItem::class,  'orderid', 'orderid');
     }
+    public function address()
+    {
+        return $this->hasOne(Address::class,  'id', 'address_id');
+    }
 
 
     public function plant()
     {
-        return $this->hasManyThrough(Plant::class, OrderedItem::class,  'orderid', 'pid', 'id', 'id');
+
+        return $this->hasManyThrough(Plant::class, OrderedItem::class, 'orderid', 'pid', 'orderid', 'pid');
     }
 }

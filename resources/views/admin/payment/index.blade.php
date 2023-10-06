@@ -10,62 +10,41 @@
 
         @php
             $tbx['tb'] = 1;
-            $tbx['title'] = 'Orders List';
-            $tbx['search-bar'] = true;
+            $tbx['title'] = 'Payment Details';
+            $tbx['search-bar'] = false;
             $route_name = 'order';
             $dir_name = 'order';
             $dummy_image = asset('assets/img/other/order-list-2.png');
         @endphp
-        @include('admin.includes.title-bar')
+        @include('admin.includes.title-bar-I')
 
-        <div class="cart__table">
-            <table class="cart__table--inner">
-                {!! Hpx::table_headings(['Order', 'Payment Id', 'Total Amt', 'status']) !!}
-                <tbody class="cart__table--body" id="slider-list">
-                    @foreach ($datalist as $data)
-                        <tr class="cart__table--body__items">
-                            <td class="cart__table--body__list">
-                                <div class="cart__product d-flex align-items-center">
-                                    <div class="cart__thumbnail">
-                                        <img src="{{ asset($dummy_image) }}">
-                                    </div>
-                                    <div class="cart__content">
-                                        <span class="cart__content--variant fw-bold">
-                                            <h3 class="cart__content--title text-capitalize">
-                                                <a href="#"> {{ $data->orderid }}</a>
-                                            </h3>
+        <div class="row ">
+            <div class="col-md-3 mb-2 text-muted">Date</div>
+            <div class="col-md-9 mb-2">{{ date('d-m-Y', strtotime($datalist->created_at)) }}</div>
+            <div class="col-md-3 mb-2 text-muted">Payment Id</div>
+            <div class="col-md-9 mb-2">{{ $datalist->payment_id }}</div>
 
-                                            <span class="text-black fs-4 me-1">
-                                                {{ Hpx::mydate_month($data->created_at) }}
-                                            </span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="cart__table--body__list">
+            <div class="col-md-3 mb-2 text-muted">Order Id</div>
+            <div class="col-md-9 mb-2">{{ $datalist->order_id }}</div>
 
-                                <a href="#"> {{ $data->payment_id }}</a>
+            <div class="col-md-3 mb-2 text-muted">Email</div>
+            <div class="col-md-9 mb-2">{{ $datalist->email }}</div>
 
-                            </td>
+            <div class="col-md-3 mb-2 text-muted">Phone No.</div>
+            <div class="col-md-9 mb-2">{{ $datalist->contact }}</div>
 
-                            <td class="cart__table--body__list">
-                                <span class="fw-bold"> <span class="text-danger">₹</span> {{ $data->total_amt }}</span>
-                            </td>
-                            <td class="cart__table--body__list">
-                                <span class="blink">
-                                    {{ Str::upper($data->status) }}
-                                </span>
+            <div class="col-md-3 mb-2 text-muted">Total Amount</div>
+            <div class="col-md-9 mb-2"> <span class="text-danger me-2">₹</span>{{ $datalist->amount }}</div>
 
+            <div class="col-md-3 mb-2 text-muted">Method</div>
+            <div class="col-md-9 mb-2">{{ $datalist->method }}</div>
 
-                            </td>
+            <div class="col-md-3 mb-2 text-muted">Currency</div>
+            <div class="col-md-9 mb-2">{{ $datalist->currency }}</div>
 
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <div class="col-12 links-border">
-                {!! Hpx::paginator($datalist) !!}
-            </div>
+            <div class="col-md-3 mb-2 text-muted">Status</div>
+            <div class="col-md-9 mb-2">{{ $datalist->status }}</div>
+            {{--  --}}
         </div>
     </div>
 
@@ -124,8 +103,8 @@
                                                         Failed</label>
                                                 </li>
                                             </ul>
-                                            <button type="button" id="save_sts_btn"
-                                                class="btn btn-primary fs-4 mt-2 w-100" style="width: 14rem">
+                                            <button type="button" id="save_sts_btn" class="btn btn-primary fs-4 mt-2 w-100"
+                                                style="width: 14rem">
                                                 Save
                                                 {!! Hpx::spinner() !!}
                                             </button>

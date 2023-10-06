@@ -16,7 +16,7 @@
             $dir_name = 'order';
             $dummy_image = asset('assets/img/other/order-list-2.png');
         @endphp
-        @include('admin.includes.title-bar')
+        @include('admin.includes.title-bar-I')
 
         <div class="cart__table">
             <table class="cart__table--inner">
@@ -32,7 +32,8 @@
                                     <div class="cart__content">
                                         <span class="cart__content--variant fw-bold">
                                             <h3 class="cart__content--title text-capitalize">
-                                                <a href="#"> {{ $data->orderid }}</a>
+                                                <a href="{{ url('admin/morder') . '/' . $data->orderid }}">
+                                                    {{ $data->orderid }}</a>
                                             </h3>
 
                                             <span class="text-black fs-4 me-1">

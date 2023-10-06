@@ -117,8 +117,9 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     });
     Route::controller(AdminOrderController::class)->group(function () {
         Route::get('/morder', 'index')->name('admin.order.index');
+        Route::get('/morder/{id}', 'byId');
     });
     Route::controller(AdminPaymentController::class)->group(function () {
-        Route::get('/payment/{id}', 'index')->name('admin.payment.index');
+        Route::get('/payment/{id}', 'index');
     });
 });

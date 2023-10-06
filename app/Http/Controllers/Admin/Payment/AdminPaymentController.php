@@ -10,7 +10,7 @@ class AdminPaymentController extends Controller
 {
     public function index(Request $req)
     {
-        return  Mpayment::where('payment_id', $req->id)->first();
+        $datalist =  Mpayment::where('payment_id', $req->id)->first();
         return view('admin.payment.index', compact('datalist'));
     }
 }

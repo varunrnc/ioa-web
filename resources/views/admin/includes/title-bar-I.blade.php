@@ -25,18 +25,17 @@
                     </svg>
                 </span>
             </a>
-            @if (isset($tbx['search-bar']) == true)
+
+            @if ($tbx['search-bar'] == true)
                 <form class="product__view--search__form float-end d-none d-lg-flex me-2"
                     action="{{ url()->current() }}" method="GET">
-
                     <div class="input-group mb-3">
-
-                        <input type="text" class="form-control fs-4" placeholder="Search here . . . " name="q"
-                            aria-describedby="basic-addon2">
+                        <input type="date" class="form-control fs-4" name="date">
                         <button type="submit" class="btn btn-primary px-2 fs-4" type="button" id="button-addon2">
                             <i class="icofont-search"></i>
                         </button>
                     </div>
+
                 </form>
             @endif
         </div>
