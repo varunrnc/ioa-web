@@ -37,9 +37,9 @@ class ApiRes
         return response()->json(["status" => false, "message" => "Account deactived !"]);
     }
 
-    public static function rlMsg($msg, $token)
+    public static function rlMsg($msg, $uid, $token)
     {
-        return response()->json(["status" => true, "message" => $msg, "token" => $token]);
+        return response()->json(["status" => true, "message" => $msg, "uid" => $uid, "token" => $token]);
     }
 
     public static function data($data)

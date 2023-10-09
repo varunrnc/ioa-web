@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Plant\ApiPlantController;
 use App\Http\Controllers\Api\Product_ApiController;
 use App\Http\Controllers\Api\Razorpay\ApiRazorpayController;
 use App\Http\Controllers\Api\SubCategory\ApiSubCategoryController;
+use App\Http\Controllers\Api\User\ApiUserController;
 use App\Http\Controllers\Api\User_ApiController;
 use App\Http\Controllers\Api\Video_ApiController;
 use App\Http\Controllers\Api\Webinar_ApiController;
@@ -88,8 +89,18 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/morder', 'data');
         Route::get('/morder/orderid', 'byId');
     });
+    Route::controller(ApiUserController::class)->group(function () {
+        Route::get('/muser', 'data');
+        Route::post('/send/email', 'sendEmail');
+        Route::post('/muser/update', 'update');
+        Route::post('/muser/image', 'image');
+    });
 });
 
+Route::controller(ApiUserController::class)->group(function () {
+    Route::post('/msend/otp', 'sendOTP');
+    Route::post('/mverify/otp', 'verfyOTP');
+});
 // Register & Login Api
 Route::controller(Auth_ApiController::class)->group(function () {
     Route::post('/login', 'login');
