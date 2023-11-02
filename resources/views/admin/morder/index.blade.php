@@ -149,6 +149,9 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
+           
+
+
             $(document).on('click', '.edit-status', function() {
                 var id_is = $(this).attr('data-id');
                 $('#order_id').val(id_is);

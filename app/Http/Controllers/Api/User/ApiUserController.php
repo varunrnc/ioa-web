@@ -8,6 +8,7 @@ use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Models\Userdetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
@@ -143,7 +144,6 @@ class ApiUserController extends Controller
         $user->state = $req->state;
         $user->country = $req->country;
         $user->pincode = $req->pincode;
-
         $status = $user->update();
         if ($status) {
             return ApiRes::success('Profile updated successfully !');
@@ -163,13 +163,22 @@ class ApiUserController extends Controller
                 return ApiRes::failed($errors->first('image'));
             }
         }
+        $user = Userdetail::where('uid', auth()->user()->uid)->first();
+        if ($user->img_sm != null) {
+            File::delete($user->img_sm);
+        }
+        if ($user->img_lg != null) {
+            File::delete($user->img_lg);
+        }
         $path = 'public/img/user/';
         $picName1 =  uniqid() . ".webp";
         $picName2 =  uniqid() . ".webp";
         $imgSm = $path . $picName1;
         $imgLg = $path . $picName2;
-        Image::make($req->image->getRealPath())->resize('480', '360')->save($imgSm);
-        Image::make($req->image->getRealPath())->resize('640', '480')->save($imgLg);
+
+        Image::make($req->image->getRealPath())->resize('512', '512')->save($imgSm);
+        Image::make($req->image->getRealPath())->resize('400', '400')->save($imgLg);
+
         $user = Userdetail::where('uid', auth()->user()->uid)->first();
         $user->img_sm =  $imgSm;
         $user->img_lg =  $imgLg;
@@ -179,5 +188,22 @@ class ApiUserController extends Controller
         } else {
             return ApiRes::error();
         }
+    }
+
+    public function logout(Request $req)
+    {
+        $user =  $req->user()->currentAccessToken()->delete();
+        if ($user) {
+            return  ApiRes::logout();
+        } else {
+            return ApiRes::error();
+        }
+    }
+    public function imgRotate($path)
+    {
+        $image = Image::make($path);
+        $image->rotate(90);
+        $image->save($path);
+        return $image->response();
     }
 }

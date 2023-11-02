@@ -12,7 +12,7 @@
             $tbx['btn-name'] = 'Add';
             $tbx['btn-link'] = route('admin.sub-category.create');
             $tbx['search-bar'] = true;
-            
+
             $route_name = 'category';
             $dir_name = 'category';
             $dummy_image = asset('assets/img/other/select-image.jpg');

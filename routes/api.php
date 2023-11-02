@@ -6,11 +6,15 @@ use App\Http\Controllers\Api\Auth_ApiController;
 use App\Http\Controllers\Api\Cart\ApiCartController;
 use App\Http\Controllers\Api\Category_ApiController;
 use App\Http\Controllers\Api\Mix_ApiController;
+use App\Http\Controllers\Api\Mplant\ApiMplantController;
 use App\Http\Controllers\Api\Order\ApiOrderController;
 use App\Http\Controllers\Api\Order_ApiController;
 use App\Http\Controllers\Api\Plant\ApiPlantController;
 use App\Http\Controllers\Api\Product_ApiController;
 use App\Http\Controllers\Api\Razorpay\ApiRazorpayController;
+use App\Http\Controllers\Api\Slider\ApiMainSliderController;
+use App\Http\Controllers\Api\Slider\ApiNurserySliderController;
+use App\Http\Controllers\Api\Slider\ApiSliderController;
 use App\Http\Controllers\Api\SubCategory\ApiSubCategoryController;
 use App\Http\Controllers\Api\User\ApiUserController;
 use App\Http\Controllers\Api\User_ApiController;
@@ -52,12 +56,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('getdata', Mix_ApiController::class);
     Route::apiResource('setdata', Mix_ApiController::class);
 
-    // Plants
+    // Plants as products
     Route::controller(ApiPlantController::class)->group(function () {
         Route::get('/mproduct', 'data');
         Route::get('/mproduct/category', 'category');
         Route::get('/mproduct/subcategory', 'subCategoryWizeProduct');
         // Route::get('/fertilizer/by/category', 'fertilizerCate');
+    });
+    // MPlants as Plants
+    Route::controller(ApiMplantController::class)->group(function () {
+        Route::get('/plant', 'data');
+        Route::get('/plant/category', 'category');
+        Route::get('/plant/sub-category', 'subcategory');
     });
     // Wishlist
     Route::controller(ApiWishlistController::class)->group(function () {
@@ -94,6 +104,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/send/email', 'sendEmail');
         Route::post('/muser/update', 'update');
         Route::post('/muser/image', 'image');
+        Route::post('/muser/logout', 'logout');
+    });
+
+    Route::controller(ApiSliderController::class)->group(function () {
+        Route::get('/slider/main', 'main');
+        Route::get('/slider/nursery', 'nursery');
     });
 });
 

@@ -38,7 +38,8 @@
                 <input type="text" hidden name="id" value="{{ $data->id }}">
                 <div class="col-12">
                     <label for="" class="form-label">Title</label>
-                    <input type="text" class="form-control" name="title" value="{{ $data->title }}">
+                    <input type="text" class="form-control" name="title" value="{{ $data->title }}"
+                        onkeyup="this.value = this.value.toUpperCase();">
                     @error('title')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -47,44 +48,34 @@
                     <label for="" class="form-label">Category</label>
                     <select class="form-select" name="category">
                         <option value="">Select</option>
-                        <option value="Fruits" {{ $data->category == 'Fruits' ? 'selected' : '' }}>Fruits</option>
-                        <option value="Flowers" {{ $data->category == 'Flowers' ? 'selected' : '' }}>Flowers</option>
-                        <option value="Vegetables" {{ $data->category == 'Vegetables' ? 'selected' : '' }}>Vegetables
-                        </option>
-                        <option value="Herbs" {{ $data->category == 'Herbs' ? 'selected' : '' }}>Herbs</option>
-
+                        @foreach ($cat as $item)
+                            <option value="{{ $item->category }}"
+                                {{ $data->category == $item->category ? 'selected' : '' }}>
+                                {{ $item->category }}
+                            </option>
+                        @endforeach
                     </select>
                     @error('category')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-
                 <div class="col-12">
-                    <label for="" class="form-label">Sub Category</label>
+                    <label for="" class="form-label">Category</label>
                     <select class="form-select" name="sub_category">
                         <option value="">Select</option>
-                        <option value="Winter Season" {{ $data->sub_category == 'Winter Season' ? 'selected' : '' }}>Winter
-                            Season</option>
-                        <option value="Summer Season" {{ $data->sub_category == 'Summer Season' ? 'selected' : '' }}>Summer
-                            Season</option>
-                        <option value="Rain Season" {{ $data->sub_category == 'Rain Season' ? 'selected' : '' }}>Rain
-                            Season
-                        </option>
-                        <option value="Temperate Fruits" {{ $data->sub_category == 'Temperate Fruits' ? 'selected' : '' }}>
-                            Temperate Fruits</option>
-                        <option value="Tropical Fruits" {{ $data->sub_category == 'Tropical Fruits' ? 'selected' : '' }}>
-                            Tropical
-                            Fruits</option>
-                        <option value="Sub-Tropical Fruits"
-                            {{ $data->sub_category == 'Sub-Tropical Fruits' ? 'selected' : '' }}>
-                            Sub-Tropical Fruits</option>
-
-
+                        @foreach ($subcat as $item)
+                            <option value="{{ $item->sub_category }}"
+                                {{ $data->sub_category == $item->sub_category ? 'selected' : '' }}>
+                                {{ $item->sub_category }}
+                            </option>
+                        @endforeach
                     </select>
-                    @error('sub-category')
+                    @error('sub_category')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+
+
                 <div class="col-12">
                     <label class="form-label">Description</label>
                     <textarea class="form-control" name="description">{{ $data->description }}</textarea>
@@ -169,6 +160,7 @@
 
 @section('script')
     <script type="text/javascript">
+        let api = new ApiService();
         $(document).ready(function() {
 
             $('.alert').alert();
@@ -208,6 +200,29 @@
                 $(img).closest('div').find('.del_icon_btn').hide();
                 $(img).closest('div').find('input[type="file"]').val(null);
             }
+
+            $("select[name=category]").change(function(e) {
+
+                let req = api.getData("{{ url('/') }}" + "/admin/mplant/category/" + this.value)
+                req.then((res) => {
+                    const dataList = res.data;
+
+
+
+                    if (res.status == true) {
+                        $("select[name=sub_category]")
+                            .empty()
+                            .append('<option  value="">select</option>')
+                        dataList.forEach(function(item) {
+                            $("select[name=sub_category]").append($('<option></option>')
+                                .val(item.sub_category).text(item
+                                    .sub_category));
+                        });
+
+
+                    }
+                });
+            })
         });
     </script>
 

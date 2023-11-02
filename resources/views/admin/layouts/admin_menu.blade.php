@@ -10,7 +10,7 @@
 <ul class="widget__categories--menu">
     <li class="widget__categories--menu__list drop_menu">
         <label class="widget__categories--menu__label d-flex align-items-center">
-            <i class="icofont-home menu-icon"></i>
+            <i class="icofont-shopping-cart menu-icon"></i>
             <span class="widget__categories--menu__text">Orders</span>
             <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355"
                 height="8.394">
@@ -22,7 +22,7 @@
             <li class="widget__categories--sub__menu--list">
                 <a class="widget__categories--sub__menu--link d-flex align-items-center"
                     href="{{ route('admin.order.index') }}">
-                    <i class="icofont-cart menu-icon2"></i>
+                    <i class="icofont-shopping-cart menu-icon2"></i>
                     <span class="widget__categories--sub__menu--text">Orders</span>
                 </a>
             </li>
@@ -104,8 +104,8 @@
 
     <li class="widget__categories--menu__list drop_menu">
         <label class="widget__categories--menu__label d-flex align-items-center">
-            <i class="icofont-home menu-icon"></i>
-            <span class="widget__categories--menu__text">Website</span>
+            <i class="icofont-image menu-icon"></i>
+            <span class="widget__categories--menu__text">Sliders</span>
             <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355"
                 height="8.394">
                 <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
@@ -115,9 +115,16 @@
         <ul class="widget__categories--sub__menu">
             <li class="widget__categories--sub__menu--list">
                 <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                    href="{{ route('slider.index') }}">
-                    <i class="icofont-multimedia menu-icon2"></i>
-                    <span class="widget__categories--sub__menu--text">Slider</span>
+                    href="{{ route('admin.mslider.index') }}">
+                    <i class="icofont-image menu-icon2"></i>
+                    <span class="widget__categories--sub__menu--text">Main</span>
+                </a>
+            </li>
+            <li class="widget__categories--sub__menu--list">
+                <a class="widget__categories--sub__menu--link d-flex align-items-center"
+                    href="{{ route('admin.nursery.slider.index') }}">
+                    <i class="icofont-image menu-icon2"></i>
+                    <span class="widget__categories--sub__menu--text">Nursery</span>
                 </a>
             </li>
             <li class="widget__categories--sub__menu--list">
@@ -132,7 +139,7 @@
 
     <li class="widget__categories--menu__list drop_menu">
         <label class="widget__categories--menu__label d-flex align-items-center">
-            <i class="icofont-home menu-icon"></i>
+            <i class="icofont-flora-flower menu-icon"></i>
             <span class="widget__categories--menu__text">Plants</span>
             <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355"
                 height="8.394">
@@ -144,8 +151,22 @@
             <li class="widget__categories--sub__menu--list">
                 <a class="widget__categories--sub__menu--link d-flex align-items-center"
                     href="{{ route('admin.mplant.index') }}">
-                    <i class="icofont-multimedia menu-icon2"></i>
+                    <i class="icofont-flora-flower menu-icon2"></i>
                     <span class="widget__categories--sub__menu--text">Plant</span>
+                </a>
+            </li>
+            <li class="widget__categories--sub__menu--list">
+                <a class="widget__categories--sub__menu--link d-flex align-items-center"
+                    href="{{ route('admin.mplant.category.index') }}">
+                    <i class="icofont-listing-box menu-icon2 fs-3"></i>
+                    <span class="widget__categories--sub__menu--text">Category</span>
+                </a>
+            </li>
+            <li class="widget__categories--sub__menu--list">
+                <a class="widget__categories--sub__menu--link d-flex align-items-center"
+                    href="{{ route('admin.mplant.subcategory.index') }}">
+                    <i class="icofont-listing-box menu-icon2 fs-3"></i>
+                    <span class="widget__categories--sub__menu--text">Sub-Category</span>
                 </a>
             </li>
 
@@ -216,8 +237,8 @@
 
     <li class="widget__categories--menu__list drop_menu">
         <label class="widget__categories--menu__label d-flex align-items-center">
-            <i class="icofont-gear-alt menu-icon"></i>
-            <span class="widget__categories--menu__text">Settings</span>
+            <i class="icofont-sale-discount menu-icon"></i>
+            <span class="widget__categories--menu__text">Coupon</span>
             <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355"
                 height="8.394">
                 <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
@@ -227,9 +248,9 @@
         <ul class="widget__categories--sub__menu">
             <li class="widget__categories--sub__menu--list">
                 <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                    href="{{ route('order_setting.index') }}">
-                    <i class="icofont-settings menu-icon2"></i>
-                    <span class="widget__categories--sub__menu--text">Order Settings</span>
+                    href="{{ route('admin.coupon.index') }}">
+                    <i class="icofont-sale-discount menu-icon2"></i>
+                    <span class="widget__categories--sub__menu--text">Coupon</span>
                 </a>
             </li>
         </ul>
@@ -248,7 +269,7 @@
             <li class="widget__categories--sub__menu--list">
                 <a class="widget__categories--sub__menu--link d-flex align-items-center"
                     href="{{ route('admin.shipping.index') }}">
-                    <i class="icofont-multimedia menu-icon2"></i>
+                    <i class="icofont-home menu-icon2"></i>
                     <span class="widget__categories--sub__menu--text">Shipping Charges</span>
                 </a>
             </li>

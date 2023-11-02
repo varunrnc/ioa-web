@@ -31,9 +31,9 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        if(auth()->user()->type == 'admin'){
-           return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
-        }else{
+        if (auth()->user()->type == 'admin') {
+            return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
+        } else {
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 
@@ -48,7 +48,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
+        Auth::guard()->logout();
 
         $request->session()->invalidate();
 

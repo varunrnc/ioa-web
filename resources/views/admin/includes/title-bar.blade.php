@@ -10,7 +10,7 @@
         </div>
         <div class="col-7">
             @if (isset($tbx['btn-name']))
-                <a class="btn btn-success float-end fs-4 px-4" href="{{ $tbx['btn-link'] }}">
+                <a class="btn btn-success float-end fs-4 px-4 fw-bold" href="{{ $tbx['btn-link'] }}">
                     {{ $tbx['btn-name'] }}
                 </a>
             @endif

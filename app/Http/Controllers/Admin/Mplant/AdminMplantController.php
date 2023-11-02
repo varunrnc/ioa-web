@@ -5,12 +5,17 @@ namespace App\Http\Controllers\Admin\Mplant;
 use App\Helpers\ApiRes;
 use App\Http\Controllers\Controller;
 use App\Models\Mplant;
+use App\Models\MplantCategory;
+use App\Models\MplantSubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 
 class AdminMplantController extends Controller
 {
+    private  $iconPath = 'public/img/mplant/icon/';
+    private  $imgPath = 'public/img/mplant/';
     public function index()
     {
         $data = Mplant::latest()->get();
@@ -18,7 +23,13 @@ class AdminMplantController extends Controller
     }
     public function create()
     {
-        return view('admin.mplant.create');
+        $cat = MplantCategory::all();
+        return view('admin.mplant.create', compact('cat'));
+    }
+    public function category(Request $req)
+    {
+        $data =   MplantSubCategory::where('category', $req->category)->get("sub_category");
+        return ApiRes::data($data);
     }
     public function save(Request $req)
     {
@@ -45,17 +56,17 @@ class AdminMplantController extends Controller
         $status = $obj->save();
 
         if ($req->hasFile('image1')) {
-            $path = 'public/plants/icon/';
+
             $picName =  uniqid() . ".webp";
-            Image::make($req->image1->getRealPath())->resize('512', '512')->save($path . $picName);
-            $obj->icon = $path . $picName;
+            Image::make($req->image1->getRealPath())->resize('512', '512')->save($this->iconPath . $picName);
+            $obj->icon = $this->iconPath . $picName;
             $status = $obj->save();
         }
         if ($req->hasFile('image2')) {
-            $path = 'public/plants/img/';
+
             $picName =  uniqid() . ".webp";
-            Image::make($req->image2->getRealPath())->resize('640', '480')->save($path . $picName);
-            $obj->img = $path . $picName;
+            Image::make($req->image2->getRealPath())->resize('640', '480')->save($this->imgPath . $picName);
+            $obj->img = $this->imgPath . $picName;
             $status = $obj->save();
         }
 
@@ -68,7 +79,9 @@ class AdminMplantController extends Controller
     public function edit(Request $req)
     {
         $data = Mplant::where('id', $req->id)->first();
-        return view('admin.mplant.edit', compact('data'));
+        $cat = MplantCategory::all();
+        $subcat = MplantSubCategory::all();
+        return view('admin.mplant.edit', compact('data', 'cat', 'subcat'));
     }
     public function update(Request $req)
     {
@@ -86,19 +99,19 @@ class AdminMplantController extends Controller
         $obj->status = $req->status;
         $status = $obj->update();
         if ($req->hasFile('image1')) {
-            unlink($obj->icon);
-            $path = 'public/plants/icon/';
+            File::delete($obj->icon);
             $picName =  uniqid() . ".webp";
-            Image::make($req->image1->getRealPath())->resize('512', '512')->save($path . $picName);
-            $obj->icon = $path . $picName;
+            Image::make($req->image1->getRealPath())->resize('512', '512')->save($this->iconPath . $picName);
+            $obj->icon = $this->iconPath . $picName;
             $status = $obj->update();
         }
         if ($req->hasFile('image2')) {
-            unlink($obj->img);
-            $path = 'public/plants/img/';
+
+            File::delete($obj->img);
+
             $picName =  uniqid() . ".webp";
-            Image::make($req->image2->getRealPath())->resize('640', '480')->save($path . $picName);
-            $obj->img = $path . $picName;
+            Image::make($req->image2->getRealPath())->resize('640', '480')->save($this->imgPath . $picName);
+            $obj->img = $this->imgPath . $picName;
             $status = $obj->update();
         }
 

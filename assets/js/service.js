@@ -1,4 +1,5 @@
 class ApiService {
+
     constructor() {
         $.ajaxSetup({
             headers: {
@@ -51,30 +52,9 @@ class ApiService {
         );
     }
 
-    success(msg) {
-        Lobibox.notify('success', {
-            pauseDelayOnHover: true,
-            continueDelayOnInactiveTab: false,
-            size: 'mini',
-            position: 'top right',
-            icon: 'bx bx-info-circle',
-            sound: false,
-            msg: msg,
 
-        });
-    }
-    error(msg) {
-        Lobibox.notify('error', {
-            pauseDelayOnHover: true,
-            continueDelayOnInactiveTab: false,
-            size: 'mini',
-            position: 'top right',
-            icon: 'bx bx-info-circle',
-            sound: false,
-            msg: msg,
 
-        });
-    }
+
 
 
 

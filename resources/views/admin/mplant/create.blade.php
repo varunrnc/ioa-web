@@ -37,7 +37,8 @@
             <div class="row">
                 <div class="col-12">
                     <label for="" class="form-label">Title</label>
-                    <input type="text" class="form-control" name="title">
+                    <input type="text" class="form-control" name="title"
+                        onkeyup="this.value = this.value.toUpperCase();">
                     @error('title')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -46,10 +47,10 @@
                     <label for="" class="form-label">Category</label>
                     <select class="form-select" name="category">
                         <option value="">Select</option>
-                        <option value="Fruits">Fruits</option>
-                        <option value="Flowers">Flowers</option>
-                        <option value="Vegetables">Vegetables</option>
-                        <option value="Herbs">Herbs</option>
+                        @foreach ($cat as $item)
+                            <option value="{{ $item->category }}">{{ $item->category }}</option>
+                        @endforeach
+
 
                     </select>
                     @error('category')
@@ -61,12 +62,7 @@
                     <label for="" class="form-label">Sub Category</label>
                     <select class="form-select" name="sub_category">
                         <option value="">Select</option>
-                        <option value="Winter Season">Winter Season</option>
-                        <option value="Summer Season">Summer Season</option>
-                        <option value="Rain Season">Rain Season</option>
-                        <option value="Temperate Fruits">Temperate Fruits</option>
-                        <option value="Tropical Fruits">Tropical Fruits</option>
-                        <option value="Sub-Tropical Fruits">Sub-Tropical Fruits</option>
+
 
 
                     </select>
@@ -157,6 +153,7 @@
 
 @section('script')
     <script type="text/javascript">
+        let api = new ApiService();
         $(document).ready(function() {
 
             $('.alert').alert();
@@ -196,6 +193,30 @@
                 $(img).closest('div').find('.del_icon_btn').hide();
                 $(img).closest('div').find('input[type="file"]').val(null);
             }
+
+            $("select[name=category]").change(function(e) {
+
+
+                let req = api.getData("category/" + this.value)
+                req.then((res) => {
+                    const dataList = res.data;
+
+                    console.log(dataList);
+
+                    if (res.status == true) {
+                        $("select[name=sub_category]")
+                            .empty()
+                            .append('<option  value="">select</option>')
+                        dataList.forEach(function(item) {
+                            $("select[name=sub_category]").append($('<option></option>')
+                                .val(item.sub_category).text(item
+                                    .sub_category));
+                        });
+
+
+                    }
+                });
+            })
         });
     </script>
 

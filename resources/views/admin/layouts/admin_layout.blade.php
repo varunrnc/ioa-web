@@ -27,6 +27,7 @@
 
     <!-- =========== Custom Style CSS ========= -->
     <link rel="stylesheet" href="{{ asset('/assets/admin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/admin/css/toaster.css') }}">
 
     @yield('style')
 
@@ -38,8 +39,14 @@
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
     <link rel="stylesheet" href="{{ asset('public/vendor/laraberg/css/laraberg.css') }}">
     <script src="{{ asset('public/vendor/laraberg/js/laraberg.js') }}"></script>
-    <!-- End Html Editor -->
 
+    <!-- End Html Editor -->
+    <script src="{{ asset('/assets/admin/js/toaster.js') }}"></script>
+    <script>
+        toastr.options.closeButton = true;
+        toastr.options.progressBar = true;
+        toastr.options.timeOut = 2000;
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             if ($(window).width() > 570) {
@@ -219,6 +226,7 @@
     <!-- ======== My JS Classes ========== -->
     <script src="{{ asset('/assets/admin/js/classes.js') }}"></script>
     <script src="{{ asset('/assets/admin/js/main.js') }}"></script>
+    <script src="{{ asset('/assets/admin/js/toaster.js') }}"></script>
 
     <script>
         var Notify = document.getElementById("myAudio");
