@@ -41,7 +41,8 @@
 
                 <div class="col-12">
                     <label for="" class="form-label">Title</label>
-                    <input type="text" class="form-control" name="title" value="{{ $data->title }}">
+                    <input type="text" class="form-control" name="title" value="{{ $data->title }}"
+                        onkeyup="this.value = this.value.toUpperCase();">
                     @error('title')
                         <span class="text-danger">* {{ $message }}</span>
                     @enderror

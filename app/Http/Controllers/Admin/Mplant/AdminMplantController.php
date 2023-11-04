@@ -37,8 +37,8 @@ class AdminMplantController extends Controller
             'title' => 'required|string|max:225',
             'category' => 'required|string|max:225',
             'sub_category' => 'required|string|max:225',
-            'image1' => 'required|image|mimes:jpeg,jpg,png',
-            'image2' => 'required|image|mimes:jpeg,jpg,png',
+            // 'image1' => 'required|image|mimes:jpeg,jpg,png',
+            // 'image2' => 'required|image|mimes:jpeg,jpg,png',
         ]);
 
         $obj = new Mplant();
@@ -57,13 +57,23 @@ class AdminMplantController extends Controller
 
         if ($req->hasFile('image1')) {
 
+            $req->validate([
+
+                'image1' => 'required|image|mimes:jpeg,jpg,png',
+
+            ]);
+
             $picName =  uniqid() . ".webp";
             Image::make($req->image1->getRealPath())->resize('512', '512')->save($this->iconPath . $picName);
             $obj->icon = $this->iconPath . $picName;
             $status = $obj->save();
         }
         if ($req->hasFile('image2')) {
+            $req->validate([
 
+                'image2' => 'required|image|mimes:jpeg,jpg,png',
+
+            ]);
             $picName =  uniqid() . ".webp";
             Image::make($req->image2->getRealPath())->resize('640', '480')->save($this->imgPath . $picName);
             $obj->img = $this->imgPath . $picName;
@@ -85,6 +95,13 @@ class AdminMplantController extends Controller
     }
     public function update(Request $req)
     {
+        $req->validate([
+            'title' => 'required|string|max:225',
+            'category' => 'required|string|max:225',
+            'sub_category' => 'required|string|max:225',
+            // 'image1' => 'required|image|mimes:jpeg,jpg,png',
+            // 'image2' => 'required|image|mimes:jpeg,jpg,png',
+        ]);
         $obj = Mplant::where('id', $req->id)->first();
         $obj->title = $req->title;
         $obj->category = $req->category;

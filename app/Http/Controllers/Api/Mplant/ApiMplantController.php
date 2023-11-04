@@ -11,10 +11,15 @@ use Illuminate\Http\Request;
 
 class ApiMplantController extends Controller
 {
-    public function category()
+    public function category(Request $req)
     {
-        $data =  MplantCategory::where('status', '1')->get();
-        return ApiRes::data($data);
+        if ($req->category == null) {
+            $data =  MplantCategory::where('status', '1')->get();
+            return ApiRes::data($data);
+        } else {
+            $data =  Mplant::groupBy('title')->where('category', $req->category)->where('status', '1')->get();
+            return ApiRes::data($data);
+        }
     }
     public function subcategory(Request $req)
     {
@@ -24,11 +29,17 @@ class ApiMplantController extends Controller
 
     public function data(Request $req)
     {
-        if ($req->sub_category == null) {
-            $data =  Mplant::where('status', '1')->latest()->get();
+        if ($req->sub_category != null && $req->category != null) {
+            $data =  Mplant::groupBy('title')->where('category', $req->category)->where('sub_category', $req->sub_category)->where('status', '1')->get();
+            return ApiRes::data($data);
+        } else if ($req->category != null) {
+            $data =  Mplant::groupBy('title')->where('category', $req->category)->where('status', '1')->get();
+            return ApiRes::data($data);
+        } else if ($req->sub_category != null) {
+            $data =  Mplant::groupBy('title')->where('sub_category', $req->sub_category)->where('status', '1')->get();
             return ApiRes::data($data);
         } else {
-            $data =  Mplant::where('sub_category', $req->sub_category)->where('status', '1')->get();
+            $data =  Mplant::groupBy('title')->where('status', '1')->get();
             return ApiRes::data($data);
         }
     }

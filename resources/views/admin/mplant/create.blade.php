@@ -74,6 +74,7 @@
                     <label class="form-label">Description</label>
                     <textarea class="form-control" name="description"></textarea>
                 </div>
+
                 <div class="col-12">
                     <label class="form-label">Soil</label>
                     <textarea class="form-control" name="soil"></textarea>
