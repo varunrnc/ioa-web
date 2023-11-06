@@ -36,7 +36,7 @@ class AdminSliderController extends Controller
         $req->validate([
             'slider_name' => 'required|string|max:225',
             'title' => 'required|string|max:225',
-            // 'image' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'image' => 'required|image|mimes:jpeg,jpg,png',
         ]);
         $orderNo = MainSlider::max('order_no') + 1;
         $obj = new MainSlider();
@@ -67,11 +67,9 @@ class AdminSliderController extends Controller
 
 
         if ($status) {
-            return ApiRes::success("Data saved successfully !");
-            // return redirect()->back()->with('success', 'Data saved successfully !');
+            return redirect()->back()->with('success', 'Data saved successfully !');
         } else {
-            return ApiRes::error();
-            // return redirect()->back()->with('error', 'Error, try again later.');
+            return redirect()->back()->with('error', 'Error, try again later.');
         }
     }
     public function  edit(Request $req)

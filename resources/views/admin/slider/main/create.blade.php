@@ -14,7 +14,8 @@
         @endphp
         @include('admin.includes.title-bar')
 
-        <form id="frm" class="row">
+        <form id="frm" class="row" action="{{ route('admin.mslider.save') }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @if (Session::has('success'))
                 <div class="row justify-content-end">
@@ -94,7 +95,6 @@
 
 @section('script')
     <script>
-        let api = new ApiService();
         $(document).ready(function() {
             $('.alert').alert();
             setTimeout(() => {
@@ -103,24 +103,10 @@
             image_edit('#showBanner');
 
             $('#frm').submit(function(e) {
-                e.preventDefault()
+
                 $('button[type=submit]').html(
                     `<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span> Save`
                 );
-
-                let req = api.setData("{{ route('admin.mslider.save') }}", this);
-                req.then((res) => {
-                    if (res.status == true) {
-
-                        alert(res.message);
-                        location.reload();
-
-                    } else {
-                        alert(res.message);
-                        location.reload();
-                    }
-                });
-
 
             });
 
