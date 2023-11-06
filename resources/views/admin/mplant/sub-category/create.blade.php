@@ -41,7 +41,7 @@
                     <select class="form-select" name="category">
                         <option value="">Select</option>
                         @foreach ($cat as $item)
-                            <option value="{{ $item->title }}">{{ $item->title }}</option>
+                            <option value="{{ $item->category }}">{{ $item->category }}</option>
                         @endforeach
                     </select>
                     @error('category')

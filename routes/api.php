@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Cart\ApiCartController;
 use App\Http\Controllers\Api\Category_ApiController;
 use App\Http\Controllers\Api\Mix_ApiController;
 use App\Http\Controllers\Api\Mplant\ApiMplantController;
+use App\Http\Controllers\Api\Mplant\ApiSeasonWiseController;
 use App\Http\Controllers\Api\Order\ApiOrderController;
 use App\Http\Controllers\Api\Order_ApiController;
 use App\Http\Controllers\Api\Plant\ApiPlantController;
@@ -68,6 +69,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/plant', 'data');
         Route::get('/plant/category', 'category');
         Route::get('/plant/sub-category', 'subcategory');
+    });
+    Route::controller(ApiSeasonWiseController::class)->group(function () {
+        Route::get('/season-wise', 'data');
+        Route::get('/season-wise/category', 'category');
+        Route::get('/season-wise/sub-category', 'subCategory');
     });
     // Wishlist
     Route::controller(ApiWishlistController::class)->group(function () {
