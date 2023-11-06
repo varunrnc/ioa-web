@@ -32,11 +32,7 @@ class AdminSliderController extends Controller
     }
     public function save(Request $req)
     {
-        if ($req->hasFile('image')) {
-            return ApiRes::success("has file");
-        } else {
-            return ApiRes::success("no  file");
-        }
+
 
         $req->validate([
             'slider_name' => 'required|string|max:225',
