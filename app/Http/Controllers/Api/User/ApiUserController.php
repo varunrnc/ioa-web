@@ -164,6 +164,7 @@ class ApiUserController extends Controller
             }
         }
         $user = Userdetail::where('uid', auth()->user()->uid)->first();
+
         if ($user->img_sm != null) {
             File::delete($user->img_sm);
         }
