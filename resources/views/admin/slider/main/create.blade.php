@@ -108,7 +108,7 @@
                     `<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span> Save`
                 );
 
-                let req = api.setFormData("{{ route('admin.mslider.save') }}", this);
+                let req = api.setData("{{ route('admin.mslider.save') }}", this);
                 req.then((res) => {
                     if (res.status == true) {
 
