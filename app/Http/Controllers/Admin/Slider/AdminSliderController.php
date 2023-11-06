@@ -67,9 +67,11 @@ class AdminSliderController extends Controller
 
 
         if ($status) {
-            return redirect()->back()->with('success', 'Data saved successfully !');
+            return ApiRes::success("Data saved successfully !");
+            // return redirect()->back()->with('success', 'Data saved successfully !');
         } else {
-            return redirect()->back()->with('error', 'Error, try again later.');
+            return ApiRes::error();
+            // return redirect()->back()->with('error', 'Error, try again later.');
         }
     }
     public function  edit(Request $req)
