@@ -32,6 +32,7 @@ class AdminSliderController extends Controller
     }
     public function save(Request $req)
     {
+        return $req->all();
 
         $req->validate([
             'slider_name' => 'required|string|max:225',
