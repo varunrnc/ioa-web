@@ -37,7 +37,7 @@ class AdminSliderController extends Controller
         $req->validate([
             'slider_name' => 'required|string|max:225',
             'title' => 'required|string|max:225',
-            'image' => 'required|file|mimes:jpeg,jpg,png',
+            'image' => 'required|image|mimes:jpeg,jpg,png',
         ]);
         $orderNo = MainSlider::max('order_no') + 1;
         $obj = new MainSlider();
