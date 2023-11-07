@@ -164,8 +164,14 @@ class AdminMplantController extends Controller
     public function delete(Request $req)
     {
         $obj = Mplant::Where('id', $req->id)->first();
-        unlink($obj->icon);
-        unlink($obj->img);
+        if ($obj->icon != null && File::exists($obj->icon)) {
+
+            File::delete($obj->icon);
+        }
+        if ($obj->img != null && File::exists($obj->icon)) {
+            File::delete($obj->icon);
+        }
+
         $status = $obj->delete();
         if ($status) {
             return  ApiRes::success('Data Deleted Successfully ! ');
