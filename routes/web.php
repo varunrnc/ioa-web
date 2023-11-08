@@ -18,6 +18,7 @@ use App\Http\Controllers\Web\Test\TestController;
 |
 */
 
+// Web 
 
 Route::prefix('/')->controller(Master_WebController::class)->group(function () {
 
